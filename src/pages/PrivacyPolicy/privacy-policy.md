@@ -1,0 +1,71 @@
+# Privacy Policy for Marcus Sanatan Software Services
+
+**Last Updated:** 14 November, 2023
+
+## 1. Introduction
+
+Welcome to Marcus Sanatan Software Services. This privacy policy outlines how we collect, use, and handle your information when you use our website and games.
+
+## 2. Information Collection and Use
+
+**Personal Data**: We collect personal information such as email addresses through contact forms or for future newsletter subscriptions. When integrating with Play Services, we may collect your Google ID and username.
+
+**Purpose**: The data collected is used for account registration for games, maintaining leaderboards, and conducting analytics to measure the reach and growth of our site and games.
+
+## 3. Data Collection Methods
+
+We collect data through:
+
+- User input on our website and games.
+- Google Analytics for tracking website and game usage, which collects data in an anonymous form and does not personally identify individual users.
+
+## 4. Use of Data
+
+The collected data is used for:
+
+- Analytics purposes to improve our services.
+- Operating features like leaderboards in our games, where a username may be required.
+
+## 5. Data Sharing and Third-Party Access
+
+Your data may be shared with:
+
+- Analytics and cloud service providers for the purpose of improving our services.
+- Other integrations related to Play Store functionalities.
+
+## 6. Data Storage and Security
+
+As we do not store personal data, there are no specific data storage practices or security measures applicable. All data is forwarded to third-party services as per user input.
+
+## 7. User Rights
+
+Users can contact us directly to access, correct, or delete their personal data, or for any other data-related inquiries.
+
+## 8. International Data Transfers
+
+International data transfers refer to the transfer of data outside the country of residence of the data subject. In our case, this may occur due to the use of international third-party services. We ensure that all such transfers comply with applicable data protection laws.
+
+## 9. Children’s Privacy
+
+Our games and services do not specifically target children under the age of 13. We do not knowingly collect personal information from children under this age.
+
+## 10. Changes to This Privacy Policy
+
+We reserve the right to modify this policy. The most current version will always be posted on our website. We will notify users of significant changes through our website or through other means.
+
+## 11. Google Analytics and Opt-Out Options
+
+Our use of Google Analytics is for gathering non-personal data regarding website and game usage. Since this data is collected anonymously, it does not personally identify individual users. Users who wish to opt out of Google Analytics can use the [Google Analytics Opt-out Browser Add-on](https://tools.google.com/dlpage/gaoptout) or adjust their browser settings to disable cookies.
+
+## 12. Consent
+
+By using our website and games, you consent to our Privacy Policy and agree to its Terms and Conditions.
+
+## 13. Contact Information
+
+If you have any questions or concerns about this privacy policy, please contact us at:
+
+Marcus Sanatan Software Services
+122 Edward Street,
+Port-of-Spain, Trinidad and Tobago
+support@gameboymarcus.com
