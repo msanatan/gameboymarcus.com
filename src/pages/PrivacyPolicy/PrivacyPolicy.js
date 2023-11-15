@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { marked } from "marked";
 import privacyPolicyContent from "./privacy-policy.md";
 
-const About = () => {
+const PrivacyPolicy = () => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
@@ -14,4 +14,4 @@ const About = () => {
   return <div dangerouslySetInnerHTML={{ __html: content }} />;
 };
 
-export default About;
+export default PrivacyPolicy;
