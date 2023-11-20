@@ -1,25 +1,42 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import Home from "./pages/Home/Home";
+import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
-// import Contact from "./pages/Contact/Contact";
+import Contact from "./pages/Contact/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy.js";
+import Layout from "./components/pages/Layout.js";
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: Home,
-  // },
+  {
+    path: "/",
+    element: (
+      <Layout>
+        <Home />
+      </Layout>
+    ),
+  },
   {
     path: "/about",
-    element: <About />,
+    element: (
+      <Layout>
+        <About />
+      </Layout>
+    ),
   },
-  // {
-  //   path: "/contact",
-  //   element: Contact,
-  // },
+  {
+    path: "/contact",
+    element: (
+      <Layout>
+        <Contact />
+      </Layout>
+    ),
+  },
   {
     path: "/privacy-policy",
-    element: <PrivacyPolicy />,
+    element: (
+      <Layout>
+        <PrivacyPolicy />
+      </Layout>
+    ),
   },
 ]);
 
