@@ -5,6 +5,8 @@ import Contact from "./pages/Contact/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy.js";
 import Layout from "./components/pages/Layout.js";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const router = createBrowserRouter([
   {
     path: "/",

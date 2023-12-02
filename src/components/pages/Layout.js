@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import "./Layout.css"; // Import your CSS styles
 
 const Layout = ({ children }) => {
   const currentYear = new Date().getFullYear();
