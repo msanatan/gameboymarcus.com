@@ -1,5 +1,6 @@
-import React from "react";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 
 const Layout = ({ children }) => {
@@ -7,7 +8,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Navbar bg="light" expand="lg" sticky="top">
+      <Navbar bg="light" expand="lg" sticky="top" className="bg-body-tertiary">
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>GameBoyMarcus</Navbar.Brand>
@@ -32,11 +33,13 @@ const Layout = ({ children }) => {
         </Container>
       </Navbar>
 
-      <Container fluid className="content">
-        {children}
-      </Container>
+      <main>
+        <Container fluid className="content">
+          {children}
+        </Container>
+      </main>
 
-      <footer className="footer">
+      <footer className="footer mt-auto py-3 bg-light">
         <Container>
           <span>&copy; {currentYear} GameBoyMarcus. All Rights Reserved.</span>
         </Container>
