@@ -9,7 +9,7 @@ const MarkdownReader = ({ markdownContent }) => {
     fetch(markdownContent)
       .then((response) => response.text())
       .then((text) => setContent(marked(text)));
-  }, []);
+  }, [markdownContent]);
 
   return <Container dangerouslySetInnerHTML={{ __html: content }} />;
 }
