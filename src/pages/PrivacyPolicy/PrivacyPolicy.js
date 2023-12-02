@@ -1,17 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { marked } from "marked";
+import MarkdownReader from "../../components/markdown/MarkdownReader";
 import privacyPolicyContent from "./privacy-policy.md";
 
 const PrivacyPolicy = () => {
-  const [content, setContent] = useState("");
-
-  useEffect(() => {
-    fetch(privacyPolicyContent)
-      .then((response) => response.text())
-      .then((text) => setContent(marked(text)));
-  }, []);
-
-  return <div dangerouslySetInnerHTML={{ __html: content }} />;
+  return <MarkdownReader markdownContent={privacyPolicyContent} />;
 };
 
 export default PrivacyPolicy;
