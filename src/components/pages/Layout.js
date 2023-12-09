@@ -1,13 +1,16 @@
+import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import Row from "react-bootstrap/Row";
 import { LinkContainer } from "react-router-bootstrap";
 
 const Layout = ({ children }) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <>
+    <Container className="vh-100 d-flex flex-column px-0" fluid>
+      {/* <Container fluid> */}
       <Navbar bg="light" expand="lg" sticky="top" className="bg-body-tertiary">
         <Container>
           <LinkContainer to="/">
@@ -33,18 +36,20 @@ const Layout = ({ children }) => {
         </Container>
       </Navbar>
 
-      <main>
-        <Container fluid className="content">
+      <Row className="flex-grow-1">
+        <Col lg={true}>
           {children}
-        </Container>
-      </main>
+        </Col>
+      </Row>
 
-      <footer className="footer mt-auto py-3 bg-light">
-        <Container>
-          <span>&copy; {currentYear} GameBoyMarcus. All Rights Reserved.</span>
-        </Container>
-      </footer>
-    </>
+      <Row>
+        <Col lg={true}>
+          <footer className="footer mt-auto py-3 bg-light">
+            <span>&copy; {currentYear} GameBoyMarcus. All Rights Reserved.</span>
+          </footer>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
