@@ -1,4 +1,5 @@
 "use client";
+import Portfolio from "@/components/portfolio/portfolio";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Box,
@@ -22,8 +23,8 @@ export default function Home() {
         bg="#FFDE59"
         minH="50vh"
         w="full"
-        justifyContent="center"
         padding={[2, 4, 8]}
+        justifyContent="center"
       >
         <SimpleGrid columns={[1, 2]} spacing={[4, 8, 16]}>
           <Center>
@@ -88,10 +89,8 @@ export default function Home() {
       </Flex>
 
       {/* Portfolio Section */}
-      <Flex id="games" bg="black" minH="50vh">
-        <Text fontSize="2xl" color="#FFDE59">
-          Explore My Work Below
-        </Text>
+      <Flex id="games" bg="black" minH="50vh" w="full" padding={[2, 4, 8]}>
+        <Portfolio />
       </Flex>
     </Box>
   );
