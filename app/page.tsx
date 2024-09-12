@@ -42,7 +42,7 @@ export default function Home() {
               fontFamily="pressStart2P"
               textAlign="left"
             >
-              I'm Marcus, a game developer from Trinidad and Tobago!
+              I&apos;m Marcus, a full stack game dev from Trinidad and Tobago!
             </Text>
 
             <List w="full" marginY={[2, 4, 8]} spacing={[2, 4, 8]}>
