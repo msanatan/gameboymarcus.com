@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Providers } from "./providers";
 import { Flex } from "@chakra-ui/react";
 import "./globals.css";
+import NavBar from "@/components/navigation/navbar";
 
 export const metadata: Metadata = {
   title: "GameBoyMarcus",
@@ -34,6 +35,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <Flex direction="column" minH="100vh">
+            <NavBar />
             {children}
           </Flex>
         </Providers>
