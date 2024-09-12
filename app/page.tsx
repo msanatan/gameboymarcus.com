@@ -1,95 +1,139 @@
+"use client";
+import { ChevronRightIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  Button,
+  HStack,
+  Center,
+  VStack,
+  SimpleGrid,
+  UnorderedList,
+  List,
+  ListItem,
+  ListIcon,
+} from "@chakra-ui/react";
 import Image from "next/image";
-import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <Box>
+      {/* Navigation */}
+      <Flex
+        as="nav"
+        position="sticky"
+        top="0"
+        zIndex="100"
+        bg="black"
+        px={[2, 4]}
+        py={[2, 4]}
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Center py={[2, 4]} paddingX={[2, 4]}>
+          <Heading as="h1" size="xl" color="#FFDE59" fontFamily="arcadeGamer">
+            GBM
+          </Heading>
+        </Center>
+        <HStack spacing={[1, 8]}>
+          <Button
+            size={["sm", "lg"]}
+            color="#FFDE59"
+            variant="none"
+            fontFamily="pressStart2P"
+          >
+            Blog
+          </Button>
+          <Button
+            size={["sm", "lg"]}
+            color="#FFDE59"
+            variant="none"
+            fontFamily="pressStart2P"
+          >
+            Contact
+          </Button>
+        </HStack>
+      </Flex>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+      {/* Main Section */}
+      <Flex
+        id="main"
+        bg="#FFDE59"
+        minH="50vh"
+        w="100%"
+        justifyContent="center"
+        padding={[2, 4, 8]}
+      >
+        <SimpleGrid columns={[1, 2]} spacing={[4, 8, 16]}>
+          <Center>
             <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/images/logo.png"
+              width={512}
+              height={512}
+              alt="GameBoyMarcus logo"
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          </Center>
+          {/* Intro Section */}
+          <VStack padding={[2, 4, 8]}>
+            <Text
+              fontSize={["md", "xl"]}
+              color="black"
+              fontFamily="pressStart2P"
+              textAlign="left"
+            >
+              I'm Marcus, a game developer from Trinidad and Tobago!
+            </Text>
+
+            <List w="full" marginY={[2, 4, 8]} spacing={[2, 4, 8]}>
+              <ListItem
+                fontSize={["xs", "md"]}
+                color="black"
+                fontFamily="pressStart2P"
+              >
+                <ListIcon as={ChevronRightIcon} color="black" />I make games
+                with Unity
+              </ListItem>
+
+              <ListItem
+                fontSize={["xs", "md"]}
+                color="black"
+                fontFamily="pressStart2P"
+              >
+                <ListIcon as={ChevronRightIcon} color="black" />I develop
+                services with Golang, Node.js (Express.js, NestJS), Python (AWS
+                Chalice, Flask)
+              </ListItem>
+
+              <ListItem
+                fontSize={["xs", "md"]}
+                color="black"
+                fontFamily="pressStart2P"
+              >
+                <ListIcon as={ChevronRightIcon} color="black" />I paint
+                frontends with React.js
+              </ListItem>
+
+              <ListItem
+                fontSize={["xs", "md"]}
+                color="black"
+                fontFamily="pressStart2P"
+              >
+                <ListIcon as={ChevronRightIcon} color="black" />I dabble in
+                mobile apps with React Native
+              </ListItem>
+            </List>
+          </VStack>
+        </SimpleGrid>
+      </Flex>
+
+      {/* Portfolio Section */}
+      <Flex id="games" bg="black" minH="50vh">
+        <Text fontSize="2xl" color="#FFDE59">
+          Explore My Work Below
+        </Text>
+      </Flex>
+    </Box>
   );
 }
