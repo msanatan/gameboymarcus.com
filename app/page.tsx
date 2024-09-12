@@ -21,7 +21,7 @@ export default function Home() {
         id="main"
         bg="#FFDE59"
         minH="50vh"
-        w="100%"
+        w="full"
         justifyContent="center"
         padding={[2, 4, 8]}
       >
@@ -37,7 +37,7 @@ export default function Home() {
           {/* Intro Section */}
           <VStack padding={[2, 4, 8]}>
             <Text
-              fontSize={["md", "xl"]}
+              fontSize={["sm", "lg", "xl"]}
               color="black"
               fontFamily="pressStart2P"
               textAlign="left"
