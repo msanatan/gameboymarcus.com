@@ -1,4 +1,5 @@
 import {
+  AspectRatio,
   Card,
   CardBody,
   CardFooter,
@@ -10,6 +11,7 @@ import {
   Stack,
   Text,
   HStack,
+  Tooltip,
 } from "@chakra-ui/react";
 import Image from "next/image";
 
@@ -70,41 +72,49 @@ export default function Item({ data }: { data: PortfolioItem }) {
       <CardBody>
         <Heading
           as="h1"
-          size={["md", "lg", "xl"]}
-          padding={[1, 2, 3]}
-          color="black"
+          fontSize={["lg", "2xl"]}
           fontFamily="arcadeGamer"
+          color="black"
           textAlign="center"
+          padding={[1, 2, 3]}
         >
           {data.title}
         </Heading>
         <Center>
-          <Image
-            src={data.img.url}
-            alt={data.img.alt}
-            height={256}
-            width={256}
-          />
+          <AspectRatio ratio={1} width={[256, 512]} height={[256, 512]}>
+            <Image
+              src={data.img.url}
+              alt={data.img.alt}
+              fill
+              style={{ objectFit: "contain" }}
+            />
+          </AspectRatio>
         </Center>
         <Stack mt="6" spacing="3">
-          <Text
-            as="p"
-            fontSize={["xs", "sm"]}
-            color="white"
-            fontFamily="pressStart2P"
-            textAlign="justify"
-          >
-            {data.description}
-          </Text>
-          <Text
-            as="p"
-            fontSize={["xs", "sm"]}
-            color="white"
-            fontFamily="pressStart2P"
-            textAlign="justify"
-          >
-            {`Contribution: ${data.role}`}
-          </Text>
+          <Tooltip label={data.description} hasArrow>
+            <Text
+              as="p"
+              fontSize={[10, 14]}
+              color="white"
+              fontFamily="pressStart2P"
+              textAlign="justify"
+              noOfLines={3}
+            >
+              {data.description}
+            </Text>
+          </Tooltip>
+          <Tooltip label={data.role} hasArrow>
+            <Text
+              as="p"
+              fontSize={[10, 14]}
+              color="white"
+              fontFamily="pressStart2P"
+              textAlign="left"
+              noOfLines={[1, 3]}
+            >
+              {`Contribution: ${data.role}`}
+            </Text>
+          </Tooltip>
         </Stack>
       </CardBody>
       <Divider />
