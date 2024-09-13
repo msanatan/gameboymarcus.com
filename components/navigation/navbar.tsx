@@ -32,6 +32,8 @@ export default function NavBar() {
           Blog
         </Button>
         <Button
+          as={Link}
+          href="/contact"
           size={["sm", "lg"]}
           color="#FFDE59"
           variant="none"
