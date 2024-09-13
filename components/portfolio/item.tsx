@@ -14,15 +14,10 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 import Image from "next/image";
+import { JSX } from "react";
 
-function ItemLinks({
-  title,
-  links,
-}: {
-  title: string;
-  links: Record<string, string>;
-}) {
-  const buttons = [];
+function ItemLinks({ title, links }: { title: string; links: PortfolioLinks }) {
+  const buttons: JSX.Element[] = [];
   Object.entries(links).forEach(([linkType, url]) => {
     let iconFile = "";
     let aria = "";
