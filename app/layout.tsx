@@ -15,6 +15,13 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
+        url: "https://gameboymarcus.com/images/og_logo.png",
+        secureUrl: "https://gameboymarcus.com/images/og_logo.png",
+        width: 1260,
+        height: 630,
+        alt: "Logo for GameBoyMarcus",
+      },
+      {
         url: "https://gameboymarcus.com/images/logo.png",
         secureUrl: "https://gameboymarcus.com/images/logo.png",
         width: 512,
@@ -32,8 +39,18 @@ export const metadata: Metadata = {
     description: "Hi! I'm Marcus Sanatan - I make games and software",
     images: [
       {
+        url: "https://gameboymarcus.com/images/og_logo.png",
+        secureUrl: "https://gameboymarcus.com/images/og_logo.png",
+        width: 1260,
+        height: 630,
+        alt: "Logo for GameBoyMarcus",
+      },
+      {
         url: "https://gameboymarcus.com/images/logo.png",
-        alt: "GameBoyMarcus logo",
+        secureUrl: "https://gameboymarcus.com/images/logo.png",
+        width: 512,
+        height: 512,
+        alt: "Logo for GameBoyMarcus",
       },
     ],
   },
