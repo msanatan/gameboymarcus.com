@@ -21,7 +21,6 @@ export default function Home() {
       <Flex
         id="main"
         bg="#FFDE59"
-        minH="50vh"
         w="full"
         padding={[2, 4, 8]}
         justifyContent="center"
@@ -89,7 +88,7 @@ export default function Home() {
       </Flex>
 
       {/* Portfolio Section */}
-      <Flex id="games" bg="black" minH="50vh" w="full" padding={[2, 4, 8]}>
+      <Flex id="games" bg="black" w="full" padding={[2, 4, 8]}>
         <Portfolio />
       </Flex>
     </Box>

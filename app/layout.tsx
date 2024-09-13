@@ -36,7 +36,9 @@ export default function RootLayout({
         <Providers>
           <Flex direction="column" minH="100vh">
             <NavBar />
-            {children}
+            <Flex flex="1" direction="column">
+              {children}
+            </Flex>
           </Flex>
         </Providers>
       </body>
