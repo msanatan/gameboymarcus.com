@@ -20,6 +20,7 @@
     "@types/mdx": "^2.0.13",
     "framer-motion": "^11.5.4",
     "next": "14.2.9",
+    "next-mdx-remote": "^5.0.0",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -29,6 +30,8 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.9",
+    "gray-matter": "^4.0.3",
+    "remark-gfm": "^4.0.0",
     "typescript": "^5"
   }
 }
