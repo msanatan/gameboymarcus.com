@@ -2,6 +2,7 @@ import {
   Box,
   Code,
   Heading,
+  Image,
   ListItem,
   OrderedList,
   Text,
@@ -9,28 +10,7 @@ import {
 } from "@chakra-ui/react";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
-import Image from "next/image";
 import path from "path";
-const { promisify } = require("util");
-import sizeOf from "image-size";
-
-const sizeOfPromise = promisify(sizeOf);
-
-async function getImageDimensions(src: string) {
-  try {
-    const imagePath = path.join(process.cwd(), "public", src);
-    const dimensions = await sizeOfPromise(imagePath);
-    return { width: dimensions.width, height: dimensions.height };
-  } catch (error) {
-    console.error(`Error fetching image dimensions for ${src}:`, error);
-    return { width: 800, height: 600 }; // Default dimensions
-  }
-}
-
-// This file allows you to provide custom React components
-// to be used in MDX files. You can import and use any
-// React component you want, including inline styles,
-// components from other libraries, and more.
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -99,7 +79,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h1: ({ children }) => (
       <Heading
         as="h1"
-        fontSize={["md", "lg", "x-large"]}
+        fontSize={[32, 48]} // Mobile: 32, Desktop: 48
         color="black"
         paddingY={[1, 2, 3]}
         fontFamily="pressStart2P"
@@ -110,7 +90,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h2: ({ children }) => (
       <Heading
         as="h2"
-        fontSize={["sm", "md"]}
+        fontSize={[24, 32]} // Mobile: 24, Desktop: 32
         color="black"
         paddingY={[1, 2, 3]}
         fontFamily="pressStart2P"
@@ -121,7 +101,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h3: ({ children }) => (
       <Heading
         as="h3"
-        fontSize={["sm", "md"]}
+        fontSize={[20, 28]} // Mobile: 20, Desktop: 28
         color="black"
         paddingY={[0.5, 1, 2]}
         fontFamily="pressStart2P"
@@ -129,21 +109,19 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </Heading>
     ),
-    img: async ({ src = "", alt = "", ...props }) => {
-      const imageSrc = src.startsWith("/images/posts/")
-        ? src
-        : `/images/posts/${src}`;
-      const { width, height } = await getImageDimensions(imageSrc);
-
-      return (
-        <Image
-          src={imageSrc}
-          alt={alt}
-          width={width}
-          height={height}
-          {...props}
-        />
-      );
+    h4: ({ children }) => (
+      <Heading
+        as="h4"
+        fontSize={[18, 24]} // Mobile: 18, Desktop: 24
+        color="black"
+        paddingY={[0.5, 1, 2]}
+        fontFamily="pressStart2P"
+      >
+        {children}
+      </Heading>
+    ),
+    img: async ({ src = "", alt = "" }) => {
+      return <Image src={src} alt={alt} objectFit="cover" />;
     },
     li: ({ children }) => (
       <ListItem
