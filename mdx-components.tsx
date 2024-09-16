@@ -1,5 +1,6 @@
 import { Heading, List, ListItem, Text } from "@chakra-ui/react";
 import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
 import Image, { ImageProps } from "next/image";
 
 // This file allows you to provide custom React components
@@ -75,6 +76,27 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {`> ${children}`}
       </ListItem>
     ),
+    a: ({ href, children }) => {
+      if (href) {
+        if (href.startsWith("/")) {
+          return (
+            <Link href={href}>
+              <Text as="span" textDecoration="underline">
+                {children}
+              </Text>
+            </Link>
+          );
+        }
+
+        return (
+          <Link href={href} target="_blank" rel="nofollow noopener noreferrer">
+            <Text as="span" textDecoration="underline">
+              {children}
+            </Text>
+          </Link>
+        );
+      }
+    },
     // img: (props) => (
     //   <Image
     //     sizes="100vw"
