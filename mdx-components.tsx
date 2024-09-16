@@ -8,6 +8,23 @@ import {
 } from "@chakra-ui/react";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
+import Image, { ImageProps } from "next/image";
+import path from "path";
+const { promisify } = require("util");
+import sizeOf from "image-size";
+
+const sizeOfPromise = promisify(sizeOf);
+
+async function getImageDimensions(src: string) {
+  try {
+    const imagePath = path.join(process.cwd(), "public", src);
+    const dimensions = await sizeOfPromise(imagePath);
+    return { width: dimensions.width, height: dimensions.height };
+  } catch (error) {
+    console.error(`Error fetching image dimensions for ${src}:`, error);
+    return { width: 800, height: 600 }; // Default dimensions
+  }
+}
 
 // This file allows you to provide custom React components
 // to be used in MDX files. You can import and use any
@@ -138,6 +155,22 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         <code className={className} {...props}>
           {children}
         </code>
+      );
+    },
+    img: async ({ src = "", alt = "", ...props }) => {
+      const imageSrc = src.startsWith("/images/posts/")
+        ? src
+        : `/images/posts/${src}`;
+      const { width, height } = await getImageDimensions(imageSrc);
+
+      return (
+        <Image
+          src={imageSrc}
+          alt={alt}
+          width={width}
+          height={height}
+          {...props}
+        />
       );
     },
     ...components,
