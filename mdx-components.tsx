@@ -19,7 +19,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         if (href.startsWith("/")) {
           return (
             <Link href={href}>
-              <Text as="span" textDecoration="underline">
+              <Text as="span" textDecoration="underline" color="#597AFF">
                 {children}
               </Text>
             </Link>
@@ -28,7 +28,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
         return (
           <Link href={href} target="_blank" rel="nofollow noopener noreferrer">
-            <Text as="span" textDecoration="underline">
+            <Text as="span" textDecoration="underline" color="#597AFF">
               {children}
             </Text>
           </Link>
