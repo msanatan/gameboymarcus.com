@@ -235,7 +235,7 @@ For web builds, once the first build is pushed up, you need to:
 - Head over to your itch.io project page
 - Under the “Uploads” section, select the checkbox to indicate the build is going to be played in the browser
 
-![Image of itch.io project settings page, showing the checkbox that makes the web build playable](/images/posts/itchio-html-build-checkbox.jpg).
+![Image of itch.io project settings page, showing the checkbox that makes the web build playable](/images/posts/itchio-html-build-checkbox.jpg)
 
 And with that, you're good to go!
 
