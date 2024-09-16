@@ -1,4 +1,5 @@
 import {
+  Box,
   Code,
   Heading,
   ListItem,
@@ -173,6 +174,22 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         />
       );
     },
+    blockquote: ({ children }) => (
+      <Box
+        as="blockquote"
+        borderLeft="4px solid #00cdac"
+        // borderColor="white"
+        pl={4}
+        py={2}
+        my={[2, 4]}
+        lineHeight={1.4}
+        bg="#f5f5f5"
+        fontStyle="italic"
+        color="#212529"
+      >
+        {children}
+      </Box>
+    ),
     ...components,
   };
 }
