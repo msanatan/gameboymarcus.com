@@ -21,7 +21,7 @@ export function padMonthOrDate(date: number): string {
 export function getPathFromDate(date: string): string {
   const dateObj = new Date(date);
   return `${dateObj.getFullYear()}/${padMonthOrDate(
-    dateObj.getMonth()
+    dateObj.getMonth() + 1
   )}/${padMonthOrDate(dateObj.getDate())}`;
 }
 
