@@ -1,4 +1,11 @@
-import { Code, Heading, List, ListItem, Text } from "@chakra-ui/react";
+import {
+  Code,
+  Heading,
+  ListItem,
+  OrderedList,
+  Text,
+  UnorderedList,
+} from "@chakra-ui/react";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 
@@ -55,14 +62,24 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </Text>
     ),
     ul: ({ children }) => (
-      <List as="ul" w="full" marginY={[1, 2, 4]} spacing={[1, 2, 4]}>
+      <UnorderedList
+        w="full"
+        marginY={[1, 2, 4]}
+        spacing={[1, 2, 4]}
+        listStylePosition="inside"
+      >
         {children}
-      </List>
+      </UnorderedList>
     ),
     ol: ({ children }) => (
-      <List as="ol" w="full" marginY={[1, 2, 4]} spacing={[1, 2, 4]}>
+      <OrderedList
+        w="full"
+        marginY={[1, 2, 4]}
+        spacing={[1, 2, 4]}
+        listStylePosition="inside"
+      >
         {children}
-      </List>
+      </OrderedList>
     ),
     li: ({ children }) => (
       <ListItem
@@ -72,7 +89,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         fontFamily="pressStart2P"
         paddingLeft={[1, 2, 4]}
       >
-        {`> ${children}`}
+        {children}
       </ListItem>
     ),
     a: ({ href, children }) => {
