@@ -1,7 +1,6 @@
-import { Heading, List, ListItem, Text } from "@chakra-ui/react";
+import { Code, Heading, List, ListItem, Text } from "@chakra-ui/react";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
-import Image, { ImageProps } from "next/image";
 
 // This file allows you to provide custom React components
 // to be used in MDX files. You can import and use any
@@ -97,13 +96,33 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         );
       }
     },
-    // img: (props) => (
-    //   <Image
-    //     sizes="100vw"
-    //     style={{ width: "100%", height: "auto" }}
-    //     {...(props as ImageProps)}
-    //   />
-    // ),
+    code: ({ children, className, ...props }) => {
+      const isInline = !className;
+
+      if (isInline) {
+        return (
+          <Code
+            backgroundColor="black"
+            borderRadius={["lg"]}
+            fontSize={["xs", "sm"]}
+            color="#79c0ff"
+            paddingX={[1, 2, 3]}
+            paddingY={1}
+            fontFamily="pressStart2P"
+            {...props}
+          >
+            {children}
+          </Code>
+        );
+      }
+
+      // Let rehypeHighlight handle the other, larger code blocks
+      return (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      );
+    },
     ...components,
   };
 }
