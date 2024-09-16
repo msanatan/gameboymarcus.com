@@ -54,11 +54,11 @@ export default async function BlogPost({ params }: BlogPostProps) {
       w="full"
       grow={1}
       direction="column"
-      padding={[4, 8, 16]}
+      padding={[4, 16, 32]}
     >
       <Heading
         as="h1"
-        fontSize={["md", "lg", "x-large"]}
+        fontSize={[32, 48]}
         color="black"
         paddingY={[1, 2, 3]}
         fontFamily="pressStart2P"
