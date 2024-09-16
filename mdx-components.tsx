@@ -32,6 +32,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </Heading>
     ),
+    h3: ({ children }) => (
+      <Heading
+        as="h3"
+        fontSize={["sm", "md"]}
+        color="black"
+        paddingY={[0.5, 1, 2]}
+        fontFamily="pressStart2P"
+      >
+        {children}
+      </Heading>
+    ),
     p: ({ children }) => (
       <Text
         as="p"
@@ -48,6 +59,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </List>
     ),
+    ol: ({ children }) => (
+      <List as="ol" w="full" marginY={[1, 2, 4]} spacing={[1, 2, 4]}>
+        {children}
+      </List>
+    ),
     li: ({ children }) => (
       <ListItem
         as="li"
@@ -59,13 +75,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {`> ${children}`}
       </ListItem>
     ),
-    img: (props) => (
-      <Image
-        sizes="100vw"
-        style={{ width: "100%", height: "auto" }}
-        {...(props as ImageProps)}
-      />
-    ),
+    // img: (props) => (
+    //   <Image
+    //     sizes="100vw"
+    //     style={{ width: "100%", height: "auto" }}
+    //     {...(props as ImageProps)}
+    //   />
+    // ),
     ...components,
   };
 }
