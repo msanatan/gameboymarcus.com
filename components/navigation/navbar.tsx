@@ -25,6 +25,16 @@ export default function NavBar() {
       <HStack spacing={[1, 8]}>
         <Button
           as={Link}
+          href="/about"
+          size={["sm", "lg"]}
+          color="#FFDE59"
+          variant="none"
+          fontFamily="pressStart2P"
+        >
+          About
+        </Button>
+        <Button
+          as={Link}
           href="/blog"
           size={["sm", "lg"]}
           color="#FFDE59"
