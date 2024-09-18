@@ -35,7 +35,7 @@ export default function NavBar() {
         </Button>
         <Button
           as={Link}
-          href="/blog"
+          href="/blog/page/1"
           size={["sm", "lg"]}
           color="#FFDE59"
           variant="none"
