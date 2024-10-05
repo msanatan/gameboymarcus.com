@@ -14,6 +14,7 @@ canvas.height = BASE_HEIGHT;
 
 const color = "black";
 const altColor = "#FFDE59";
+const playerColor = "white";
 let playButtonBlinkId;
 
 // MENU
@@ -87,14 +88,80 @@ const borders = [
 ];
 
 // GAME
-const player = Sprite({
-  x: 100,
-  y: 80,
-  color,
-  width: 20,
-  height: 40,
-  dx: 2,
+const background = Sprite({
+  x: 0,
+  y: 0,
+  color: altColor,
+  width: BASE_WIDTH,
+  height: BASE_HEIGHT,
 });
+
+const player = Sprite({
+  x: 48,
+  y: 368,
+  color: playerColor,
+  width: 16,
+  height: 16,
+});
+
+const PLATFORM_WIDTH = 64;
+const PLATFORM_HEIGHT = 16;
+const PLATFORM_X_LEFT = 24;
+const PLATFORM_X_CENTRE = Math.floor((BASE_WIDTH / 2) - (PLATFORM_WIDTH / 2));
+const PLATFORM_X_RIGHT = BASE_WIDTH - 48 - (PLATFORM_WIDTH / 2);
+const platformProps = {
+  color,
+  width: PLATFORM_WIDTH,
+  height: PLATFORM_HEIGHT,
+};
+
+const platforms = [
+  Sprite({
+    x: PLATFORM_X_LEFT,
+    y: 384,
+    ...platformProps,
+  }),
+  Sprite({
+    x: PLATFORM_X_CENTRE,
+    y: 320,
+    ...platformProps,
+  }),
+  Sprite({
+    x: PLATFORM_X_RIGHT,
+    y: 384,
+    ...platformProps,
+  }),
+  Sprite({
+    x: PLATFORM_X_LEFT,
+    y: 256,
+    ...platformProps,
+  }),
+  Sprite({
+    x: PLATFORM_X_CENTRE,
+    y: 192,
+    ...platformProps,
+  }),
+  Sprite({
+    x: PLATFORM_X_RIGHT,
+    y: 256,
+    ...platformProps,
+  }),
+  Sprite({
+    x: PLATFORM_X_LEFT,
+    y: 128,
+    ...platformProps,
+  }),
+  Sprite({
+    x: PLATFORM_X_CENTRE,
+    y: 64,
+    ...platformProps,
+  }),
+  Sprite({
+    x: PLATFORM_X_RIGHT,
+    y: 128,
+    ...platformProps,
+  }),
+];
 
 // GAME LOOPS
 const menuLoop = GameLoop({
@@ -112,13 +179,18 @@ const gameLoop = GameLoop({
     if (player.x > BASE_WIDTH) {
       player.x = -player.width;
     }
+
+    platforms.forEach(p => p.update());
   },
   render: function () {
-    player.render();
+    background.render();
     borders.forEach((border) => border.render());
+    platforms.forEach(p => p.render());
+    player.render();
   },
   context,
 });
 
-menuLoop.start();
-playButtonBlinkId = setInterval(playButtonBlink, 500);
+// menuLoop.start();
+// playButtonBlinkId = setInterval(playButtonBlink, 500);
+gameLoop.start();
