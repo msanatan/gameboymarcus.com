@@ -13,6 +13,8 @@ canvas.width = BASE_WIDTH;
 canvas.height = BASE_HEIGHT;
 
 const color = "black";
+const altColor = "#FFDE59";
+let playButtonBlinkId;
 
 // MENU
 const menuTextOptions = {
@@ -31,17 +33,21 @@ const playButton = new Button({
     textAlign: "center",
   },
   onUp() {
-    console.log("here we go");
     menuLoop.stop();
+    clearInterval(playButtonBlinkId);
     gameLoop.start();
   },
 
   render() {
-    if (this.focused) {
+    if (this.hover) {
       this.text.font = `24px "Press Start 2P", sans-serif`;
     }
   },
 });
+
+function playButtonBlink() {
+  playButton.textNode.color = playButton.textNode.color == color ? altColor : color;
+}
 
 // BORDERS
 const borderThickness = 2;
@@ -92,7 +98,7 @@ const player = Sprite({
 
 // GAME LOOPS
 const menuLoop = GameLoop({
-  update: function () {},
+  update: function () { },
   render: function () {
     playButton.render();
   },
@@ -114,5 +120,5 @@ const gameLoop = GameLoop({
   context,
 });
 
-console.log("button: ", playButton);
 menuLoop.start();
+playButtonBlinkId = setInterval(playButtonBlink, 500);
