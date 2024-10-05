@@ -28,7 +28,7 @@ export default function Home() {
           <Center>
             <Flex w={270} h={480} style={{ overflow: "hidden" }}>
               <chakra.iframe
-                src="/games/plucky/index.html"
+                src="/games/index.html"
                 w="100%"
                 h="100%"
               ></chakra.iframe>
