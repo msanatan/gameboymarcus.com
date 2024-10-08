@@ -1,4 +1,4 @@
-const { init, initKeys, initPointer, keyPressed, Button, GameLoop, Sprite } = kontra;
+const { init, initKeys, initPointer, keyPressed, Button, GameLoop, Sprite, Text } = kontra;
 
 // Initialize canvas without setting size
 const { canvas } = init();
@@ -17,38 +17,60 @@ const color = "black";
 const altColor = "#FFDE59";
 const playerColor = "white";
 let playButtonBlinkId;
+let restartButtonBlinkId;
+
+// Game states
+const MENU = 0;
+const PLAYING = 1;
+const GAME_OVER = 2;
+let gameState = MENU;
+
+// Game variables
+let score = 0;
+let highScore = 0;
+let platformSpeed = 0.5;
+const maxPlatformSpeed = 2;
+const platformSpeedIncreaseRate = 0.0001;
 
 // MENU
 const menuTextOptions = {
   color,
   font: `20px "Press Start 2P", sans-serif`,
   anchor: { x: 0.5, y: 0.5 },
+  textAlign: "center",
 };
 
-const playButton = new Button({
+const playButton = Button({
   x: BASE_WIDTH / 2,
   y: BASE_HEIGHT / 2,
   anchor: { x: 0.5, y: 0.5 },
   text: {
     text: "Play?",
     ...menuTextOptions,
-    textAlign: "center",
   },
-  onUp() {
-    menuLoop.stop();
-    clearInterval(playButtonBlinkId);
-    gameLoop.start();
+  onDown() {
+    startGame();
   },
-
   render() {
-    if (this.hover) {
-      this.text.font = `24px "Press Start 2P", sans-serif`;
+    this.draw();
+    if (this.hovered) {
+      this.textNode.font = `24px "Press Start 2P", sans-serif`;
+    } else {
+      this.textNode.font = `20px "Press Start 2P", sans-serif`;
     }
   },
 });
 
+function buttonBlink(button) {
+  button.textNode.color = button.textNode.color == color ? altColor : color;
+}
+
 function playButtonBlink() {
-  playButton.textNode.color = playButton.textNode.color == color ? altColor : color;
+  buttonBlink(playButton);
+}
+
+function restartButtonBlink() {
+  buttonBlink(restartButton);
 }
 
 // BORDERS
@@ -97,29 +119,23 @@ const background = Sprite({
   height: BASE_HEIGHT,
 });
 
-function checkCollision(player, platform) {
+function checkCollision(obj1, obj2) {
   return (
-    player.x < platform.x + platform.width &&
-    player.x + player.width > platform.x &&
-    player.y < platform.y + platform.height &&
-    player.y + player.height > platform.y
+    obj1.x < obj2.x + obj2.width &&
+    obj1.x + obj1.width > obj2.x &&
+    obj1.y < obj2.y + obj2.height &&
+    obj1.y + obj1.height > obj2.y
   );
 }
 
-// Additional function to check if the collision is from the top
-function isCollidingFromTop(player, platform) {
-  // Check if the player was falling (dy > 0)
-  if (player.dy <= 0) return false;
-
-  // Calculate previous position
-  const prevY = player.y - player.dy;
-
-  // Check if the player's previous bottom was above the platform's top
-  return prevY + player.height <= platform.y;
+function isCollidingFromTop(obj1, obj2) {
+  if (obj1.dy <= 0) return false;
+  const prevY = obj1.y - obj1.dy;
+  return prevY + obj1.height <= obj2.y;
 }
 
 const gravity = 0.5;
-const jumpStrength = -10;  // Velocity when the player jumps
+const jumpStrength = -10;
 let isJumping = false;
 const playerSpeed = 2;
 const player = Sprite({
@@ -130,48 +146,38 @@ const player = Sprite({
   height: 16,
   dy: 0,
   update() {
-    let onPlatform = false;
-
-    // Apply gravity
     this.dy += gravity;
     this.y += this.dy;
 
-    // Check collision with platforms
     for (let i = 0; i < platforms.length; i++) {
       if (checkCollision(this, platforms[i]) && isCollidingFromTop(this, platforms[i])) {
-        // Stop falling and place the player on top of the platform
         this.y = platforms[i].y - this.height;
         this.dy = 0;
         isJumping = false;
-        onPlatform = true; // Player is on a platform
       }
     }
 
-    // Apply gravity only if the player is not on any platform
-    if (!onPlatform) {
-      // Gravity already applied above
-    }
-
-    // Horizontal movement logic
     if (keyPressed('arrowleft')) {
       this.x -= playerSpeed;
-      // Prevent moving beyond the left border
       if (this.x < borderThickness) {
         this.x = borderThickness;
       }
     }
     if (keyPressed('arrowright')) {
       this.x += playerSpeed;
-      // Prevent moving beyond the right border
       if (this.x + this.width > BASE_WIDTH - borderThickness) {
         this.x = BASE_WIDTH - borderThickness - this.width;
       }
     }
 
-    // Jumping logic
     if (keyPressed('space') && !isJumping) {
       this.dy = jumpStrength;
       isJumping = true;
+    }
+
+    // Check if player has fallen off the bottom
+    if (this.y > BASE_HEIGHT) {
+      gameOver();
     }
   }
 });
@@ -181,83 +187,150 @@ const PLATFORM_HEIGHT = 16;
 const PLATFORM_X_LEFT = 24;
 const PLATFORM_X_CENTRE = Math.floor((BASE_WIDTH / 2) - (PLATFORM_WIDTH / 2));
 const PLATFORM_X_RIGHT = BASE_WIDTH - 48 - (PLATFORM_WIDTH / 2);
+const PLATFORM_Y_GAP = 64;
 const platformProps = {
   color,
   width: PLATFORM_WIDTH,
   height: PLATFORM_HEIGHT,
 };
 
-const platforms = [
-  Sprite({
-    x: PLATFORM_X_LEFT,
-    y: 384,
-    ...platformProps,
-  }),
-  Sprite({
-    x: PLATFORM_X_CENTRE,
-    y: 320,
-    ...platformProps,
-  }),
-  Sprite({
-    x: PLATFORM_X_RIGHT,
-    y: 384,
-    ...platformProps,
-  }),
-  Sprite({
-    x: PLATFORM_X_LEFT,
-    y: 256,
-    ...platformProps,
-  }),
-  Sprite({
-    x: PLATFORM_X_CENTRE,
-    y: 192,
-    ...platformProps,
-  }),
-  Sprite({
-    x: PLATFORM_X_RIGHT,
-    y: 256,
-    ...platformProps,
-  }),
-  Sprite({
-    x: PLATFORM_X_LEFT,
-    y: 128,
-    ...platformProps,
-  }),
-  Sprite({
-    x: PLATFORM_X_CENTRE,
-    y: 64,
-    ...platformProps,
-  }),
-  Sprite({
-    x: PLATFORM_X_RIGHT,
-    y: 128,
-    ...platformProps,
-  }),
-];
+let platforms = [];
 
-// GAME LOOPS
-const menuLoop = GameLoop({
-  update: function () { },
-  render: function () {
-    playButton.render();
-  },
-  context,
+function createPlatform(x, y) {
+  return Sprite({
+    ...platformProps,
+    x,
+    y,
+  });
+}
+
+function updatePlatforms() {
+  // Move existing platforms down
+  platforms.forEach(platform => {
+    platform.y += platformSpeed;
+  });
+
+  // Remove platforms that have fallen off the bottom
+  platforms = platforms.filter(platform => platform.y < BASE_HEIGHT);
+
+  // Add new platform if needed
+  if (platforms.length < 9) {
+    const x = [PLATFORM_X_LEFT, PLATFORM_X_CENTRE, PLATFORM_X_RIGHT][Math.floor(Math.random() * 3)];
+    const lastPlatformY = platforms[platforms.length - 1].y;
+    platforms.push(createPlatform(x, lastPlatformY - PLATFORM_Y_GAP));
+  }
+
+  // Increase platform speed over time
+  platformSpeed = Math.min(platformSpeed + platformSpeedIncreaseRate, maxPlatformSpeed);
+}
+
+// Score display is white so it's not mixed with the platforms
+const scoreText = Text({
+  text: 'Score: 0',
+  font: '16px "Press Start 2P", sans-serif',
+  color: playerColor,
+  x: 10,
+  y: 10,
 });
 
-const gameLoop = GameLoop({
-  update: function () {
-    player.update();
-    platforms.forEach(p => p.update());
+// Game over screen
+const gameOverText = Text({
+  text: 'Game Over',
+  x: BASE_WIDTH / 2,
+  y: BASE_HEIGHT / 2 - 64,
+  ...menuTextOptions,
+});
+
+const finalScoreText = Text({
+  text: 'Score: 0',
+  ...menuTextOptions,
+  font: '16px "Press Start 2P", sans-serif',
+  x: BASE_WIDTH / 2,
+  y: BASE_HEIGHT / 2,
+});
+
+const highScoreText = Text({
+  text: 'High Score: 0',
+  ...menuTextOptions,
+  font: '16px "Press Start 2P", sans-serif',
+  x: BASE_WIDTH / 2,
+  y: BASE_HEIGHT / 2 + 32,
+});
+
+const restartButton = Button({
+  x: BASE_WIDTH / 2,
+  y: BASE_HEIGHT / 2 + 96,
+  anchor: { x: 0.5, y: 0.5 },
+  text: {
+    text: 'Restart?',
+    ...menuTextOptions,
+    font: '18px "Press Start 2P", sans-serif',
+  },
+  onDown() {
+    clearInterval(restartButtonBlinkId);
+    startGame();
+  },
+});
+
+function startGame() {
+  gameState = PLAYING;
+  score = 0;
+  platformSpeed = 0.5;
+  platforms = [
+    createPlatform(PLATFORM_X_LEFT, 384),
+    createPlatform(PLATFORM_X_CENTRE, 320),
+    createPlatform(PLATFORM_X_RIGHT, 256),
+    createPlatform(PLATFORM_X_LEFT, 192),
+    createPlatform(PLATFORM_X_CENTRE, 128),
+    createPlatform(PLATFORM_X_RIGHT, 64),
+    createPlatform(PLATFORM_X_LEFT, 0),
+    createPlatform(PLATFORM_X_CENTRE, -64),
+    createPlatform(PLATFORM_X_RIGHT, -128),
+  ];
+  player.x = 48;
+  player.y = 368;
+  player.dy = 0;
+}
+
+function gameOver() {
+  gameState = GAME_OVER;
+  if (score > highScore) {
+    highScore = score;
+  }
+  finalScoreText.text = `Score: ${Math.floor(score)}`;
+  highScoreText.text = `High Score: ${Math.floor(highScore)}`;
+  restartButtonBlinkId = setInterval(restartButtonBlink, 500);
+}
+
+// GAME LOOPS
+const mainLoop = GameLoop({
+  update: function (dt) {
+    if (gameState === PLAYING) {
+      player.update();
+      updatePlatforms();
+      score += dt;
+      scoreText.text = `Score: ${Math.floor(score)}`;
+    }
   },
   render: function () {
     background.render();
     borders.forEach((border) => border.render());
-    platforms.forEach(p => p.render());
-    player.render();
+
+    if (gameState === MENU) {
+      playButton.render();
+    } else if (gameState === PLAYING) {
+      platforms.forEach(p => p.render());
+      player.render();
+      scoreText.render();
+    } else if (gameState === GAME_OVER) {
+      gameOverText.render();
+      finalScoreText.render();
+      highScoreText.render();
+      restartButton.render();
+    }
   },
-  context,
 });
 
-// menuLoop.start();
-// playButtonBlinkId = setInterval(playButtonBlink, 500);
-gameLoop.start();
+// Start the game
+mainLoop.start();
+playButtonBlinkId = setInterval(playButtonBlink, 500);
