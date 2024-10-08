@@ -1,8 +1,9 @@
-const { init, initPointer, Button, GameLoop, Sprite } = kontra;
+const { init, initKeys, initPointer, keyPressed, Button, GameLoop, Sprite } = kontra;
 
 // Initialize canvas without setting size
 const { canvas } = init();
 initPointer(); // Needed for buttons to work
+initKeys(); // Needed for keyboard input to work
 const context = canvas.getContext("2d");
 
 // Set base game scale and resolution
@@ -96,12 +97,83 @@ const background = Sprite({
   height: BASE_HEIGHT,
 });
 
+function checkCollision(player, platform) {
+  return (
+    player.x < platform.x + platform.width &&
+    player.x + player.width > platform.x &&
+    player.y < platform.y + platform.height &&
+    player.y + player.height > platform.y
+  );
+}
+
+// Additional function to check if the collision is from the top
+function isCollidingFromTop(player, platform) {
+  // Check if the player was falling (dy > 0)
+  if (player.dy <= 0) return false;
+
+  // Calculate previous position
+  const prevY = player.y - player.dy;
+
+  // Check if the player's previous bottom was above the platform's top
+  return prevY + player.height <= platform.y;
+}
+
+const gravity = 0.5;
+const jumpStrength = -10;  // Velocity when the player jumps
+let isJumping = false;
+const playerSpeed = 2;
 const player = Sprite({
   x: 48,
   y: 368,
   color: playerColor,
   width: 16,
   height: 16,
+  dy: 0,
+  update() {
+    let onPlatform = false;
+
+    // Apply gravity
+    this.dy += gravity;
+    this.y += this.dy;
+
+    // Check collision with platforms
+    for (let i = 0; i < platforms.length; i++) {
+      if (checkCollision(this, platforms[i]) && isCollidingFromTop(this, platforms[i])) {
+        // Stop falling and place the player on top of the platform
+        this.y = platforms[i].y - this.height;
+        this.dy = 0;
+        isJumping = false;
+        onPlatform = true; // Player is on a platform
+      }
+    }
+
+    // Apply gravity only if the player is not on any platform
+    if (!onPlatform) {
+      // Gravity already applied above
+    }
+
+    // Horizontal movement logic
+    if (keyPressed('arrowleft')) {
+      this.x -= playerSpeed;
+      // Prevent moving beyond the left border
+      if (this.x < borderThickness) {
+        this.x = borderThickness;
+      }
+    }
+    if (keyPressed('arrowright')) {
+      this.x += playerSpeed;
+      // Prevent moving beyond the right border
+      if (this.x + this.width > BASE_WIDTH - borderThickness) {
+        this.x = BASE_WIDTH - borderThickness - this.width;
+      }
+    }
+
+    // Jumping logic
+    if (keyPressed('space') && !isJumping) {
+      this.dy = jumpStrength;
+      isJumping = true;
+    }
+  }
 });
 
 const PLATFORM_WIDTH = 64;
@@ -175,11 +247,6 @@ const menuLoop = GameLoop({
 const gameLoop = GameLoop({
   update: function () {
     player.update();
-
-    if (player.x > BASE_WIDTH) {
-      player.x = -player.width;
-    }
-
     platforms.forEach(p => p.update());
   },
   render: function () {
