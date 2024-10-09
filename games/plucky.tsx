@@ -396,6 +396,10 @@ export default function PluckyGame() {
         leftButton.enable();
         rightButton.enable();
         jumpButton.enable();
+        // Set their pressed state to false, sometimes events are triggered automatically
+        leftButton.pressed = false;
+        rightButton.pressed = false;
+        jumpButton.pressed = false;
       }
 
       // Clear intervals of blinking buttons
