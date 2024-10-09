@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
-import path from "path";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
