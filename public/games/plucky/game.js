@@ -30,7 +30,7 @@ let score = 0;
 let highScore = 0;
 let platformSpeed = 0.5;
 const maxPlatformSpeed = 2;
-const platformSpeedIncreaseRate = 0.0001;
+const platformSpeedIncreaseRate = 0.0005;
 
 // MENU
 const menuTextOptions = {
@@ -119,6 +119,7 @@ const background = Sprite({
   height: BASE_HEIGHT,
 });
 
+// Collision functions
 function checkCollision(obj1, obj2) {
   return (
     obj1.x < obj2.x + obj2.width &&
@@ -182,49 +183,56 @@ const player = Sprite({
   }
 });
 
-const PLATFORM_WIDTH = 64;
+// PLATFORM CONFIGURATION
 const PLATFORM_HEIGHT = 16;
-const PLATFORM_X_LEFT = 24;
-const PLATFORM_X_CENTRE = Math.floor((BASE_WIDTH / 2) - (PLATFORM_WIDTH / 2));
-const PLATFORM_X_RIGHT = BASE_WIDTH - 48 - (PLATFORM_WIDTH / 2);
 const PLATFORM_Y_GAP = 64;
+const GAP_MIN = 30;
+const GAP_MAX = 60;
+const GAP_OPTIONS = [30, 60];
+
+// Base Platform Properties
 const platformProps = {
   color,
-  width: PLATFORM_WIDTH,
   height: PLATFORM_HEIGHT,
 };
 
-let platforms = [];
-
-function createPlatform(x, y) {
+function createPlatformSegment(x, y, width) {
   return Sprite({
     ...platformProps,
     x,
     y,
+    width,
   });
 }
 
-function updatePlatforms() {
-  // Move existing platforms down
-  platforms.forEach(platform => {
-    platform.y += platformSpeed;
-  });
+function createFullPlatform(y) {
+  return createPlatformSegment(borderThickness, y, BASE_WIDTH - 2 * borderThickness);
+}
 
-  // Remove platforms that have fallen off the bottom
-  platforms = platforms.filter(platform => platform.y < BASE_HEIGHT);
+function createPlatformWithGap(y) {
+  const gapSize = GAP_OPTIONS[Math.floor(Math.random() * GAP_OPTIONS.length)];
+  const maxGapStart = (BASE_WIDTH - 2 * borderThickness) - gapSize;
+  const gapStart = borderThickness + Math.floor(Math.random() * (maxGapStart + 1));
 
-  // Add new platform if needed
-  if (platforms.length < 9) {
-    const x = [PLATFORM_X_LEFT, PLATFORM_X_CENTRE, PLATFORM_X_RIGHT][Math.floor(Math.random() * 3)];
-    const lastPlatformY = platforms[platforms.length - 1].y;
-    platforms.push(createPlatform(x, lastPlatformY - PLATFORM_Y_GAP));
+  const leftWidth = gapStart - borderThickness;
+  const rightWidth = (BASE_WIDTH - 2 * borderThickness) - leftWidth - gapSize;
+
+  const segments = [];
+
+  if (leftWidth > 0) {
+    segments.push(createPlatformSegment(borderThickness, y, leftWidth));
   }
 
-  // Increase platform speed over time
-  platformSpeed = Math.min(platformSpeed + platformSpeedIncreaseRate, maxPlatformSpeed);
+  if (rightWidth > 0) {
+    segments.push(createPlatformSegment(borderThickness + leftWidth + gapSize, y, rightWidth));
+  }
+
+  return segments;
 }
 
-// Score display is white so it's not mixed with the platforms
+let platforms = [];
+
+// Score display
 const scoreText = Text({
   text: 'Score: 0',
   font: '16px "Press Start 2P", sans-serif',
@@ -276,17 +284,20 @@ function startGame() {
   gameState = PLAYING;
   score = 0;
   platformSpeed = 0.5;
+
+  // Initialize Platforms with the First Full Platform
   platforms = [
-    createPlatform(PLATFORM_X_LEFT, 384),
-    createPlatform(PLATFORM_X_CENTRE, 320),
-    createPlatform(PLATFORM_X_RIGHT, 256),
-    createPlatform(PLATFORM_X_LEFT, 192),
-    createPlatform(PLATFORM_X_CENTRE, 128),
-    createPlatform(PLATFORM_X_RIGHT, 64),
-    createPlatform(PLATFORM_X_LEFT, 0),
-    createPlatform(PLATFORM_X_CENTRE, -64),
-    createPlatform(PLATFORM_X_RIGHT, -128),
+    createFullPlatform(384),
   ];
+
+  // Generate Additional Platforms with Gaps
+  for (let i = 1; i < 9; i++) { // Total 9 platforms (1 full + 8 with gaps)
+    const y = 384 - (PLATFORM_Y_GAP * i);
+    const platformSegments = createPlatformWithGap(y);
+    platforms.push(...platformSegments);
+  }
+
+  // Reset Player Position
   player.x = 48;
   player.y = 368;
   player.dy = 0;
@@ -300,6 +311,27 @@ function gameOver() {
   finalScoreText.text = `Score: ${Math.floor(score)}`;
   highScoreText.text = `High Score: ${Math.floor(highScore)}`;
   restartButtonBlinkId = setInterval(restartButtonBlink, 500);
+}
+
+function updatePlatforms() {
+  // Move existing platforms down
+  platforms.forEach(platform => {
+    platform.y += platformSpeed;
+  });
+
+  // Remove platforms that have fallen off the bottom
+  platforms = platforms.filter(platform => platform.y < BASE_HEIGHT);
+
+  // Add new platform if needed
+  if (platforms.length < 9 * 2) {
+    const lastPlatformY = platforms.length > 0 ? platforms[platforms.length - 1].y : 384;
+    const newY = lastPlatformY - PLATFORM_Y_GAP;
+    const newPlatformSegments = createPlatformWithGap(newY);
+    platforms.push(...newPlatformSegments);
+  }
+
+  // Increase platform speed over time
+  platformSpeed = Math.min(platformSpeed + platformSpeedIncreaseRate, maxPlatformSpeed);
 }
 
 // GAME LOOPS
@@ -333,4 +365,4 @@ const mainLoop = GameLoop({
 
 // Start the game
 mainLoop.start();
-playButtonBlinkId = setInterval(playButtonBlink, 500);
+playButtonBlinkId = setInterval(playButtonBlink, 500); // Make player button blink
