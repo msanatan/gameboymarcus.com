@@ -3286,6 +3286,11 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
+kontra@^10.0.2:
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/kontra/-/kontra-10.0.2.tgz#699dda8c976a7e58dbd517de45ad40081d620788"
+  integrity sha512-NJfxmWtwDi1rWjj/fhOVwW4txjEVsDNgNNHNzc87YnsN7qZlZlkLQ0mWt7SN6WEAMH2KmX4evgL3Cmc2zVOXvQ==
+
 language-subtag-registry@^0.3.20:
   version "0.3.23"
   resolved "https://registry.yarnpkg.com/language-subtag-registry/-/language-subtag-registry-0.3.23.tgz#23529e04d9e3b74679d70142df3fd2eb6ec572e7"
