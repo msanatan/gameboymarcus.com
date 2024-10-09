@@ -42,7 +42,7 @@ export default function PluckyGame() {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     // Mobile control buttons
-    const mobileButtonSize = 36;
+    const mobileButtonSize = 48;
     const mobileButtonColor = 'rgba(255, 255, 255, 0.5)';
     const mobileButtonTextColor = 'black';
 
@@ -56,7 +56,7 @@ export default function PluckyGame() {
       text: {
         text: '←',
         color: mobileButtonTextColor,
-        font: '24px Arial, sans-serif',
+        font: 'bold 32px Arial, sans-serif',
         anchor: { x: 0.5, y: 0.5 },
       },
     });
@@ -71,7 +71,7 @@ export default function PluckyGame() {
       text: {
         text: '→',
         color: mobileButtonTextColor,
-        font: '24px Arial, sans-serif',
+        font: 'bold 32px Arial, sans-serif',
         anchor: { x: 0.5, y: 0.5 },
       },
     });
@@ -87,7 +87,7 @@ export default function PluckyGame() {
         text: '↑',
         align: 'center',
         color: mobileButtonTextColor,
-        font: '24px Arial, sans-serif',
+        font: 'bold  32px Arial, sans-serif',
         anchor: { x: 0.5, y: 0.5 },
       },
     });
