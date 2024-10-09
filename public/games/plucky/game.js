@@ -1,4 +1,4 @@
-const { init, initKeys, initPointer, keyPressed, Button, GameLoop, Sprite, Text } = kontra;
+const { collides, init, initKeys, initPointer, keyPressed, Button, GameLoop, Sprite, Text } = kontra;
 
 // Initialize canvas without setting size
 const { canvas } = init();
@@ -119,26 +119,41 @@ const background = Sprite({
   height: BASE_HEIGHT,
 });
 
-// Collision functions
-function checkCollision(obj1, obj2) {
-  return (
-    obj1.x < obj2.x + obj2.width &&
-    obj1.x + obj1.width > obj2.x &&
-    obj1.y < obj2.y + obj2.height &&
-    obj1.y + obj1.height > obj2.y
-  );
-}
-
 function isCollidingFromTop(obj1, obj2) {
   if (obj1.dy <= 0) return false;
   const prevY = obj1.y - obj1.dy;
   return prevY + obj1.height <= obj2.y;
 }
 
+function isCollidingFromBottom(obj1, obj2) {
+  if (obj1.dy >= 0) return false;
+  const prevY = obj1.y - obj1.dy;
+  return prevY >= obj2.y + obj2.height;
+}
+
+function isCollidingHorizontally(obj1, obj2, direction) {
+  const isMovingRight = direction > 0;
+  const isMovingLeft = direction < 0;
+
+  if (isMovingRight) {
+    return obj1.x + obj1.width + direction >= obj2.x &&
+      obj1.x < obj2.x &&
+      obj1.y + obj1.height > obj2.y &&
+      obj1.y < obj2.y + obj2.height;
+  } else if (isMovingLeft) {
+    return obj1.x + direction <= obj2.x + obj2.width &&
+      obj1.x + obj1.width > obj2.x + obj2.width &&
+      obj1.y + obj1.height > obj2.y &&
+      obj1.y < obj2.y + obj2.height;
+  }
+
+  return false;
+}
+
 const gravity = 0.5;
 const jumpStrength = -10;
 let isJumping = false;
-const playerSpeed = 2;
+const playerSpeed = 2.5;
 const player = Sprite({
   x: 48,
   y: 368,
@@ -148,28 +163,53 @@ const player = Sprite({
   dy: 0,
   update() {
     this.dy += gravity;
-    this.y += this.dy;
+
+    // Vertical movement and collision check
+    let newY = this.y + this.dy;
 
     for (let i = 0; i < platforms.length; i++) {
-      if (checkCollision(this, platforms[i]) && isCollidingFromTop(this, platforms[i])) {
-        this.y = platforms[i].y - this.height;
-        this.dy = 0;
-        isJumping = false;
+      if (collides(this, platforms[i])) {
+        if (isCollidingFromTop(this, platforms[i])) {
+          newY = platforms[i].y - this.height; // Align player to the top of the platform
+          this.dy = 0;
+          isJumping = false;
+        } else if (isCollidingFromBottom(this, platforms[i])) {
+          newY = platforms[i].y + platforms[i].height;
+          this.dy = 0;
+        }
       }
     }
 
+    this.y = newY;
+
+    // Horizontal movement and collision check
+    let newX = this.x;
+    let horizontalMovement = 0;
+
     if (keyPressed('arrowleft')) {
-      this.x -= playerSpeed;
-      if (this.x < borderThickness) {
-        this.x = borderThickness;
-      }
+      horizontalMovement = -playerSpeed;
     }
     if (keyPressed('arrowright')) {
-      this.x += playerSpeed;
-      if (this.x + this.width > BASE_WIDTH - borderThickness) {
-        this.x = BASE_WIDTH - borderThickness - this.width;
+      horizontalMovement = playerSpeed;
+    }
+
+    if (horizontalMovement !== 0) {
+      let canMove = true;
+      for (let i = 0; i < platforms.length; i++) {
+        if (isCollidingHorizontally(this, platforms[i], horizontalMovement)) {
+          canMove = false;
+          break;
+        }
+      }
+
+      if (canMove) {
+        newX += horizontalMovement;
       }
     }
+
+    // Ensure player stays within game borders
+    newX = Math.max(borderThickness, Math.min(newX, BASE_WIDTH - borderThickness - this.width));
+    this.x = newX;
 
     if (keyPressed('space') && !isJumping) {
       this.dy = jumpStrength;
@@ -365,4 +405,4 @@ const mainLoop = GameLoop({
 
 // Start the game
 mainLoop.start();
-playButtonBlinkId = setInterval(playButtonBlink, 500); // Make player button blink
+playButtonBlinkId = setInterval(playButtonBlink, 500); // Make play button blink
