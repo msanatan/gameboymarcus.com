@@ -8,7 +8,7 @@ export default function PluckyGame() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    const { canvas } = init();
+    const { canvas } = init(canvasRef.current!);
     initPointer(); // Needed for buttons to work
     initKeys(); // Needed for keyboard input to work
 
