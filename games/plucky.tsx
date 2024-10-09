@@ -53,6 +53,7 @@ export default function PluckyGame() {
       height: mobileButtonSize,
       color: mobileButtonColor,
       anchor: { x: 0.5, y: 0.5 },
+      disabled: true,
       text: {
         text: '←',
         color: mobileButtonTextColor,
@@ -68,6 +69,7 @@ export default function PluckyGame() {
       height: mobileButtonSize,
       color: mobileButtonColor,
       anchor: { x: 0.5, y: 0.5 },
+      disabled: true,
       text: {
         text: '→',
         color: mobileButtonTextColor,
@@ -83,6 +85,7 @@ export default function PluckyGame() {
       height: mobileButtonSize,
       color: mobileButtonColor,
       anchor: { x: 0.5, y: 0.5 },
+      disabled: true,
       text: {
         text: '↑',
         align: 'center',
@@ -389,6 +392,12 @@ export default function PluckyGame() {
       score = 0;
       platformSpeed = 0.5;
 
+      if (isMobile) {
+        leftButton.enable();
+        rightButton.enable();
+        jumpButton.enable();
+      }
+
       // Clear intervals of blinking buttons
       if (playButtonBlinkId) {
         clearInterval(playButtonBlinkId);
@@ -420,6 +429,11 @@ export default function PluckyGame() {
 
     function gameOver() {
       gameState = GAME_OVER;
+      if (isMobile) {
+        leftButton.disable();
+        rightButton.disable();
+        jumpButton.disable();
+      }
       if (score > highScore) {
         highScore = score;
       }
