@@ -32,6 +32,60 @@ let platformSpeed = 0.5;
 const maxPlatformSpeed = 2;
 const platformSpeedIncreaseRate = 0.0005;
 
+// Mobile detection
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+// Mobile control buttons
+const mobileButtonSize = 36;
+const mobileButtonColor = 'rgba(255, 255, 255, 0.5)';
+const mobileButtonTextColor = 'black';
+
+const leftButton = Button({
+  x: 32,
+  y: BASE_HEIGHT - mobileButtonSize - 16,
+  width: mobileButtonSize,
+  height: mobileButtonSize,
+  color: mobileButtonColor,
+  anchor: { x: 0.5, y: 0.5 },
+  text: {
+    text: '←',
+    color: mobileButtonTextColor,
+    font: '24px Arial, sans-serif',
+    anchor: { x: 0.5, y: 0.5 },
+  },
+});
+
+const rightButton = Button({
+  x: mobileButtonSize + 64,
+  y: BASE_HEIGHT - mobileButtonSize - 16,
+  width: mobileButtonSize,
+  height: mobileButtonSize,
+  color: mobileButtonColor,
+  anchor: { x: 0.5, y: 0.5 },
+  text: {
+    text: '→',
+    color: mobileButtonTextColor,
+    font: '24px Arial, sans-serif',
+    anchor: { x: 0.5, y: 0.5 },
+  },
+});
+
+const jumpButton = Button({
+  x: BASE_WIDTH - mobileButtonSize - 16,
+  y: BASE_HEIGHT - mobileButtonSize - 16,
+  width: mobileButtonSize,
+  height: mobileButtonSize,
+  color: mobileButtonColor,
+  anchor: { x: 0.5, y: 0.5 },
+  text: {
+    text: '↑',
+    align: 'center',
+    color: mobileButtonTextColor,
+    font: '24px Arial, sans-serif',
+    anchor: { x: 0.5, y: 0.5 },
+  },
+});
+
 // MENU
 const menuTextOptions = {
   color,
@@ -186,10 +240,10 @@ const player = Sprite({
     let newX = this.x;
     let horizontalMovement = 0;
 
-    if (keyPressed('arrowleft')) {
+    if (keyPressed('arrowleft') || (isMobile && leftButton.pressed)) {
       horizontalMovement = -playerSpeed;
     }
-    if (keyPressed('arrowright')) {
+    if (keyPressed('arrowright') || (isMobile && rightButton.pressed)) {
       horizontalMovement = playerSpeed;
     }
 
@@ -211,7 +265,7 @@ const player = Sprite({
     newX = Math.max(borderThickness, Math.min(newX, BASE_WIDTH - borderThickness - this.width));
     this.x = newX;
 
-    if (keyPressed('space') && !isJumping) {
+    if ((keyPressed('space') || (isMobile && jumpButton.pressed)) && !isJumping) {
       this.dy = jumpStrength;
       isJumping = true;
     }
@@ -382,18 +436,32 @@ const mainLoop = GameLoop({
       updatePlatforms();
       score += dt;
       scoreText.text = `Score: ${Math.floor(score)}`;
+
+      // Update mobile buttons
+      if (isMobile) {
+        leftButton.update();
+        rightButton.update();
+        jumpButton.update();
+      }
     }
   },
   render: function () {
     background.render();
-    borders.forEach((border) => border.render());
 
     if (gameState === MENU) {
       playButton.render();
     } else if (gameState === PLAYING) {
+      borders.forEach((border) => border.render());
       platforms.forEach(p => p.render());
       player.render();
       scoreText.render();
+
+      // Render mobile buttons
+      if (isMobile) {
+        leftButton.render();
+        rightButton.render();
+        jumpButton.render();
+      }
     } else if (gameState === GAME_OVER) {
       gameOverText.render();
       finalScoreText.render();
