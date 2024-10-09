@@ -1,6 +1,7 @@
 "use client";
 import Portfolio from "@/components/portfolio/portfolio";
-import { Box, Flex, Center, SimpleGrid, chakra } from "@chakra-ui/react";
+import PluckyGame from "@/games/plucky";
+import { Box, Flex, Center, SimpleGrid } from "@chakra-ui/react";
 import Image from "next/image";
 
 export default function Home() {
@@ -27,11 +28,9 @@ export default function Home() {
           {/* Intro Section */}
           <Center>
             <Flex w={270} h={480} style={{ overflow: "hidden" }}>
-              <chakra.iframe
-                src="/games/index.html"
-                w="100%"
-                h="100%"
-              ></chakra.iframe>
+              <Center>
+                <PluckyGame />
+              </Center>
             </Flex>
           </Center>
         </SimpleGrid>
