@@ -474,3 +474,4 @@ const mainLoop = GameLoop({
 // Start the game
 mainLoop.start();
 playButtonBlinkId = setInterval(playButtonBlink, 500); // Make play button blink
+window.focus();
