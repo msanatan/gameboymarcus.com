@@ -3,6 +3,7 @@ import { Providers } from "./providers";
 import { Flex } from "@chakra-ui/react";
 import "./globals.css";
 import NavBar from "@/components/navigation/navbar";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "GameBoyMarcus",
@@ -72,6 +73,7 @@ export default function RootLayout({
             </Flex>
           </Flex>
         </Providers>
+        <GoogleAnalytics gaId="G-W210S38VMQ" />
       </body>
     </html>
   );
