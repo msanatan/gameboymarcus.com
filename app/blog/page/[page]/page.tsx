@@ -1,8 +1,13 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { posts } from "@/.velite";
+import { posts as allPosts } from "@/.velite";
 
 const POSTS_PER_PAGE = 10;
+
+// Sort posts by date descending (newest first)
+const posts = [...allPosts].sort((a, b) => 
+  new Date(b.date).getTime() - new Date(a.date).getTime()
+);
 
 interface BlogPageProps {
   params: {
