@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllPosts, getPathFromDate } from "@/lib/content";
+import { posts } from "@/.velite";
 
 const POSTS_PER_PAGE = 10;
 
@@ -11,12 +11,10 @@ interface BlogPageProps {
 }
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
-  const params = Array.from({ length: totalPages }, (_, i) => ({
+  return Array.from({ length: totalPages }, (_, i) => ({
     page: (i + 1).toString(),
   }));
-  return params;
 }
 
 export async function generateMetadata({ params }: BlogPageProps) {
@@ -34,7 +32,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
     notFound();
   }
 
-  const posts = getAllPosts();
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
 
   if (page > totalPages && totalPages !== 0) {
@@ -55,15 +52,12 @@ export default async function BlogPage({ params }: BlogPageProps) {
         <ul className="space-y-8">
           {paginatedPosts.map((post) => (
             <li key={post.slug} className="border-b border-primary pb-8 last:border-0">
-              <Link
-                href={`/blog/${getPathFromDate(post.date)}/${post.slug}`}
-                className="group"
-              >
+              <Link href={post.url} className="group">
                 <h2 className="mb-3 font-retro text-lg text-primary underline transition-opacity group-hover:opacity-80 md:text-xl">
                   {post.title}
                 </h2>
                 <p className="mb-2 text-xs text-white md:text-sm">
-                  {new Date(post.date).toLocaleDateString("en-US", {
+                  {new Date(post.dateString).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",

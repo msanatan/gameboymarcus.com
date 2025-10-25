@@ -16,7 +16,7 @@ Hi! This project is an interesting one - even though the gameplay loop is dead s
 
 This image is taken from: https://docs.godotengine.org/en/stable/getting_started/step_by_step/your_first_game.html
 
-I recently rebuilt my [website](/) and I want to add a game to it. I got experience with Phaser and Pixi and could build and integrate a mini-game pretty quickly with either. However, as I'm diving deeper into Unity, why not get more practice?
+I recently rebuilt my website and I want to add a game to it. I got experience with Phaser and Pixi and could build and integrate a mini-game pretty quickly with either. However, as I'm diving deeper into Unity, why not get more practice?
 
 ## Godot Signals -> Unity Events
 
@@ -64,7 +64,7 @@ Eventually, my small projects typically blossom into something much more involve
 
 ## WebGL Builds...
 
-As a web developer and someone familiar with Godot's HTML5 builds, I can only say that this sucks in Unity. It's **ridiculously ** slow, and the default templates aren't ideal for different devices.
+As a web developer and someone familiar with Godot's HTML5 builds, I can only say that this sucks in Unity. It's **ridiculously** slow, and the default templates aren't ideal for different devices.
 
 A few things worked for me to improve this experience:
 

@@ -37,7 +37,7 @@ Aside from giving me the theme for Jammin 2020, this game did 2 major things for
 
 This game was special, it was my first game jam entry! It was also the largest game I made in scope thus far. Cuadrado's Trials is a fun but maybe annoying little platformer where you play as a little square robot trying to get by. I built it with Phaser 3 and Tiled and honestly had loads of fun making it. I got a lot of feedback as well, which was really great for me. My game dev community expanded a lot through this game \- I even got job offers because of it.
 
-You can read this for a [recap of the game](blog/2020/10/20/cuadradros-trails-an-overdue-recap).
+You can read this for a [recap of the game](/blog/2020/10/20/cuadradros-trails-an-overdue-recap).
 
 It's a short game, but it required a really long 2 weeks to make it happen. I'm proud, and this really gave me the confidence to continue this journey.
 
