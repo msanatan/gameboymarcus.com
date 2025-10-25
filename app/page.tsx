@@ -18,7 +18,7 @@ export default function Home() {
             />
           </div>
           <div className="flex flex-col gap-4">
-            <h1 className="font-retro text-3xl text-black md:text-5xl">
+            <h1 className="font-retro text-2xl text-black md:text-5xl">
               GameBoyMarcus
             </h1>
             <p className="text-lg text-black md:text-xl">

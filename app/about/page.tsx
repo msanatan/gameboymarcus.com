@@ -16,7 +16,7 @@ export default async function AboutPage() {
   return (
     <div className="flex-1 bg-primary px-4 py-12 md:px-16 md:py-16">
       <div className="mx-auto max-w-3xl">
-        <h1 className="mb-8 text-center font-retro text-3xl text-black md:text-4xl">
+        <h1 className="mb-8 text-center font-retro text-2xl text-black">
           About Me
         </h1>
         <div 
