@@ -1,5 +1,3 @@
-import { AspectRatio } from "@chakra-ui/react";
-
 export default function InstagramEmbed({
   id,
   title,
@@ -9,17 +7,16 @@ export default function InstagramEmbed({
   title: string;
   orientation: string;
 }) {
+  const aspectClass = orientation === "landscape" ? "aspect-video" : "aspect-[9/16]";
+
   return (
-    <AspectRatio
-      maxW={640}
-      ratio={orientation === "landscape" ? 16 / 9 : 9 / 16}
-      margin={[1, 2, 3]}
-    >
+    <div className={`relative my-4 max-w-xl overflow-hidden rounded-lg md:my-6 ${aspectClass}`}>
       <iframe
         src={`https://www.instagram.com/reel/${id}/embed`}
         title={title}
         loading="lazy"
+        className="absolute inset-0 h-full w-full"
       />
-    </AspectRatio>
+    </div>
   );
 }

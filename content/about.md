@@ -1,7 +1,3 @@
-import { Flex } from "@chakra-ui/react";
-
-<Flex id="main" direction="column" paddingX={[4, 16, 32]} paddingY={[2, 4, 8]} bg="#FFDE59" grow={1}>
-
 I'm **Marcus**, a software/game dev from Trinidad and Tobago! Current interests revolve around AI, VR and AR - but I love building interesting projects.
 
 - I make mobile and VR games with Unity
@@ -10,5 +6,3 @@ I'm **Marcus**, a software/game dev from Trinidad and Tobago! Current interests 
 - I dabble in mobile apps with React Native
 
 If you we got similar interests, please reach out!
-
-</Flex>

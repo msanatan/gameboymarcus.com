@@ -1,16 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import {
-  Button,
-  Center,
-  Flex,
-  HStack,
-  List,
-  ListItem,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import { getAllPosts, getPathFromDate } from "../../../../lib/posts";
+import { getAllPosts, getPathFromDate } from "@/lib/content";
 
 const POSTS_PER_PAGE = 10;
 
@@ -27,6 +17,14 @@ export async function generateStaticParams() {
     page: (i + 1).toString(),
   }));
   return params;
+}
+
+export async function generateMetadata({ params }: BlogPageProps) {
+  const page = parseInt(params.page, 10);
+  return {
+    title: `Blog - Page ${page} - GameBoyMarcus`,
+    description: "Thoughts on software development, AI, games, and more by Marcus Sanatan",
+  };
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
@@ -48,74 +46,67 @@ export default async function BlogPage({ params }: BlogPageProps) {
   const paginatedPosts = posts.slice(startIndex, endIndex);
 
   return (
-    <Flex id="main" bg="black" w="full" grow={1} padding={[4, 8, 16]}>
-      <Center w="full">
-        <VStack w="full">
-          <Center>
-            <List as="ul" w="full" marginY={[1, 2, 4]} spacing={[2, 4, 8]}>
-              {paginatedPosts.map((post) => (
-                <ListItem key={post.slug}>
-                  <Link
-                    href={`/blog/${getPathFromDate(post.date)}/${post.slug}`}
-                  >
-                    <Text
-                      fontSize={["sm", "md", "lg"]}
-                      color="#FFDE59"
-                      fontFamily="pressStart2P"
-                      textDecoration="underline"
-                      _hover={{ textDecoration: "underline" }}
-                    >
-                      {post.title}
-                    </Text>
-                  </Link>
-                  <Text
-                    fontSize={["xs", "sm"]}
-                    color="white"
-                    fontFamily="pressStart2P"
-                  >
-                    {new Date(post.date).toLocaleDateString()}
-                  </Text>
-                </ListItem>
-              ))}
-            </List>
-          </Center>
+    <div className="flex-1 bg-black px-4 py-12 md:px-8 md:py-16">
+      <div className="mx-auto max-w-4xl">
+        <h1 className="mb-12 text-center font-retro text-3xl text-primary md:text-4xl">
+          Blog
+        </h1>
 
-          <HStack spacing={[4, 8]}>
-            {page > 1 ? (
-              <Link href={`/blog/page/${page - 1}`}>
-                <Button
-                  my={[2, 4, 8]}
-                  type="submit"
-                  variant="outline"
-                  color="white"
-                  _hover={{ color: "#FFDE59" }}
-                  fontFamily="pressStart2P"
-                >
-                  Previous
-                </Button>
+        <ul className="space-y-8">
+          {paginatedPosts.map((post) => (
+            <li key={post.slug} className="border-b border-primary pb-8 last:border-0">
+              <Link
+                href={`/blog/${getPathFromDate(post.date)}/${post.slug}`}
+                className="group"
+              >
+                <h2 className="mb-3 font-retro text-lg text-primary underline transition-opacity group-hover:opacity-80 md:text-xl">
+                  {post.title}
+                </h2>
+                <p className="mb-2 text-xs text-white md:text-sm">
+                  {new Date(post.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+                {post.excerpt && (
+                  <p className="text-sm text-gray-300 md:text-base">
+                    {post.excerpt}
+                  </p>
+                )}
               </Link>
-            ) : (
-              <span />
-            )}
-            {page < totalPages ? (
-              <Link href={`/blog/page/${page + 1}`}>
-                <Button
-                  my={[2, 4, 8]}
-                  type="submit"
-                  variant="outline"
-                  color="white"
-                  _hover={{ color: "#FFDE59" }}
-                  fontFamily="pressStart2P"
-                >
-                  Next
-                </Button>
-              </Link>
-            ) : (
-              <span />
-            )}
-          </HStack>
-        </VStack>
-      </Center>
-    </Flex>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-12 flex items-center justify-center gap-8">
+          {page > 1 ? (
+            <Link
+              href={`/blog/page/${page - 1}`}
+              className="rounded border-2 border-white px-6 py-3 font-retro text-sm text-white transition-colors hover:border-primary hover:text-primary"
+            >
+              Previous
+            </Link>
+          ) : (
+            <div className="w-28" />
+          )}
+
+          <span className="font-retro text-sm text-white">
+            Page {page} of {totalPages}
+          </span>
+
+          {page < totalPages ? (
+            <Link
+              href={`/blog/page/${page + 1}`}
+              className="rounded border-2 border-white px-6 py-3 font-retro text-sm text-white transition-colors hover:border-primary hover:text-primary"
+            >
+              Next
+            </Link>
+          ) : (
+            <div className="w-28" />
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

@@ -1,134 +1,79 @@
 "use client";
-import {
-  Link as ChakraLink,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  HStack,
-  IconButton,
-  Drawer,
-  DrawerBody,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  VStack,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
-import Link from "next/link";
 
-function NavbarButton({
-  url,
-  name,
-  onClick,
-}: {
-  url: string;
-  name: string;
-  onClick?: () => void;
-}) {
-  return (
-    <Button
-      as={Link}
-      href={url}
-      size={["md", "lg"]}
-      color="#FFDE59"
-      variant="none"
-      fontFamily="pressStart2P"
-      _hover={{ textDecoration: "underline" }}
-      onClick={onClick}
-    >
-      {name}
-    </Button>
-  );
-}
+import Link from "next/link";
+import { useState } from "react";
 
 export default function NavBar() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
     { name: "About", href: "/about" },
+    { name: "Projects", href: "/projects" },
     { name: "Blog", href: "/blog/page/1" },
-    { name: "Contact", href: "/contact" },
   ];
 
   return (
-    <>
-      <Flex
-        as="nav"
-        position="sticky"
-        top="0"
-        zIndex="100"
-        bg="black"
-        px={[2, 4]}
-        py={[2, 4]}
-        justifyContent="space-between"
-        alignItems="center"
-      >
+    <nav className="sticky top-0 z-50 bg-black px-4 py-4 md:px-8">
+      <div className="flex items-center justify-between">
         {/* Logo */}
-        <Center py={[2, 4]} paddingX={[4, 8]}>
-          <Link href="/" passHref legacyBehavior>
-            <ChakraLink textDecor="none">
-              <Heading
-                as="h1"
-                size="xl"
-                color="#FFDE59"
-                fontFamily="arcadeGamer"
-              >
-                GBM
-              </Heading>
-            </ChakraLink>
-          </Link>
-        </Center>
+        <Link href="/" className="px-4 py-2 md:px-8">
+          <h1 className="font-retro text-2xl text-primary hover:opacity-80 transition-opacity">
+            GBM
+          </h1>
+        </Link>
 
         {/* Desktop Menu */}
-        <HStack
-          paddingX={[4, 8]}
-          spacing={[1, 8]}
-          display={{ base: "none", md: "flex" }}
-        >
+        <div className="hidden items-center gap-8 px-8 md:flex">
           {navLinks.map((link) => (
-            <NavbarButton
+            <Link
               key={link.name}
-              url={link.href}
-              name={link.name}
-              onClick={onClose}
-            />
+              href={link.href}
+              className="font-retro text-sm text-primary hover:underline md:text-base"
+            >
+              {link.name}
+            </Link>
           ))}
-        </HStack>
+        </div>
 
         {/* Mobile Menu Button */}
-        <IconButton
-          aria-label="Open menu"
-          icon={<HamburgerIcon />}
-          size="xl"
-          color="#FFDE59"
-          bg="black"
-          onClick={onOpen}
-          display={{ base: "flex", md: "none" }}
-          paddingX={[4, 8]}
-        />
-      </Flex>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex px-4 text-primary md:hidden"
+          aria-label="Toggle menu"
+        >
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            {isOpen ? (
+              <path d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+      </div>
 
-      {/* Mobile Drawer Menu */}
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent bg="black" color="#FFDE59">
-          <DrawerCloseButton />
-          <DrawerBody>
-            <VStack spacing={4} mt={10}>
-              {navLinks.map((link) => (
-                <NavbarButton
-                  key={link.name}
-                  url={link.href}
-                  name={link.name}
-                  onClick={onClose}
-                />
-              ))}
-            </VStack>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </>
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="mt-4 flex flex-col gap-4 md:hidden">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="font-retro text-sm text-primary hover:underline"
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+      )}
+    </nav>
   );
 }

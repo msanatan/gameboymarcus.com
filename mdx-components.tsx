@@ -1,15 +1,6 @@
-import {
-  Box,
-  Code,
-  Heading,
-  Image,
-  ListItem,
-  OrderedList,
-  Text,
-  UnorderedList,
-} from "@chakra-ui/react";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
+import Image from "next/image";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -17,55 +8,40 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       if (href) {
         if (href.startsWith("/")) {
           return (
-            <Link href={href}>
-              <Text as="span" textDecoration="underline" color="#597AFF">
-                {children}
-              </Text>
+            <Link href={href} className="text-link underline hover:opacity-80">
+              {children}
             </Link>
           );
         }
 
         return (
-          <Link href={href} target="_blank" rel="nofollow noopener noreferrer">
-            <Text as="span" textDecoration="underline" color="#597AFF">
-              {children}
-            </Text>
+          <Link
+            href={href}
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+            className="text-link underline hover:opacity-80"
+          >
+            {children}
           </Link>
         );
       }
     },
     blockquote: ({ children }) => (
-      <Box
-        as="blockquote"
-        borderLeft="4px solid #00cdac"
-        pl={4}
-        py={2}
-        my={[2, 4]}
-        lineHeight={1.4}
-        bg="#f5f5f5"
-        fontStyle="italic"
-        color="#212529"
-      >
+      <blockquote className="my-4 border-l-4 border-accent bg-gray-100 py-2 pl-4 italic leading-relaxed text-gray-800 md:my-6">
         {children}
-      </Box>
+      </blockquote>
     ),
     code: ({ children, className, ...props }) => {
       const isInline = !className;
 
       if (isInline) {
         return (
-          <Code
-            backgroundColor="black"
-            borderRadius={["lg"]}
-            fontSize={["xs", "sm"]}
-            color="#79c0ff"
-            paddingX={[1, 2, 3]}
-            paddingY={1}
-            fontFamily="pressStart2P"
+          <code
+            className="rounded-lg bg-code-bg px-2 py-1 font-retro text-xs text-code-text md:text-sm"
             {...props}
           >
             {children}
-          </Code>
+          </code>
         );
       }
 
@@ -76,93 +52,55 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     h1: ({ children }) => (
-      <Heading
-        as="h1"
-        fontSize={[32, 48]} // Mobile: 32, Desktop: 48
-        color="black"
-        paddingY={[1, 2, 3]}
-        fontFamily="pressStart2P"
-      >
+      <h1 className="py-2 font-retro text-2xl text-black md:py-4 md:text-4xl">
         {children}
-      </Heading>
+      </h1>
     ),
     h2: ({ children }) => (
-      <Heading
-        as="h2"
-        fontSize={[24, 32]} // Mobile: 24, Desktop: 32
-        color="black"
-        paddingY={[1, 2, 3]}
-        fontFamily="pressStart2P"
-      >
+      <h2 className="py-2 font-retro text-xl text-black md:py-4 md:text-3xl">
         {children}
-      </Heading>
+      </h2>
     ),
     h3: ({ children }) => (
-      <Heading
-        as="h3"
-        fontSize={[20, 28]} // Mobile: 20, Desktop: 28
-        color="black"
-        paddingY={[0.5, 1, 2]}
-        fontFamily="pressStart2P"
-      >
+      <h3 className="py-1 font-retro text-lg text-black md:py-3 md:text-2xl">
         {children}
-      </Heading>
+      </h3>
     ),
     h4: ({ children }) => (
-      <Heading
-        as="h4"
-        fontSize={[18, 24]} // Mobile: 18, Desktop: 24
-        color="black"
-        paddingY={[0.5, 1, 2]}
-        fontFamily="pressStart2P"
-      >
+      <h4 className="py-1 font-retro text-base text-black md:py-2 md:text-xl">
         {children}
-      </Heading>
+      </h4>
     ),
     img: async ({ src = "", alt = "" }) => {
-      return <Image src={src} alt={alt} objectFit="cover" />;
+      return (
+        <Image
+          src={src}
+          alt={alt}
+          width={800}
+          height={600}
+          className="my-4 h-auto w-full rounded object-cover"
+        />
+      );
     },
     li: ({ children }) => (
-      <ListItem
-        as="li"
-        fontSize={["xs", "sm"]}
-        color="black"
-        fontFamily="pressStart2P"
-        paddingLeft={[1, 2, 4]}
-      >
+      <li className="pl-2 text-sm text-black md:pl-4 md:text-base">
         {children}
-      </ListItem>
+      </li>
     ),
     ol: ({ children }) => (
-      <OrderedList
-        w="full"
-        marginY={[1, 2, 4]}
-        spacing={[1, 2, 4]}
-        listStylePosition="inside"
-      >
+      <ol className="my-2 w-full space-y-2 list-decimal list-inside md:my-4 md:space-y-4">
         {children}
-      </OrderedList>
+      </ol>
     ),
     p: ({ children }) => (
-      <Text
-        as="p"
-        fontSize={["xs", "sm"]}
-        color="black"
-        paddingY={[1, 2, 3]}
-        fontFamily="pressStart2P"
-      >
+      <p className="py-2 text-sm leading-relaxed text-black md:py-4 md:text-base md:leading-relaxed">
         {children}
-      </Text>
+      </p>
     ),
     ul: ({ children }) => (
-      <UnorderedList
-        w="full"
-        marginY={[1, 2, 4]}
-        spacing={[1, 2, 4]}
-        listStylePosition="inside"
-      >
+      <ul className="my-2 w-full space-y-2 list-disc list-inside md:my-4 md:space-y-4">
         {children}
-      </UnorderedList>
+      </ul>
     ),
     ...components,
   };

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Providers } from "./providers";
-import { Flex } from "@chakra-ui/react";
 import "./globals.css";
 import NavBar from "@/components/navigation/navbar";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { inter, pressStart2P } from "./fonts";
 
 export const metadata: Metadata = {
   title: "GameBoyMarcus",
@@ -63,16 +62,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <Providers>
-          <Flex direction="column" minH="100vh">
-            <NavBar />
-            <Flex flex="1" direction="column">
-              {children}
-            </Flex>
-          </Flex>
-        </Providers>
+    <html lang="en" className={`${inter.variable} ${pressStart2P.variable}`}>
+      <body className="flex min-h-screen flex-col font-sans antialiased">
+        <NavBar />
+        <main className="flex flex-1 flex-col">{children}</main>
         <GoogleAnalytics gaId="G-W210S38VMQ" />
       </body>
     </html>

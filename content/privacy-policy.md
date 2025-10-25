@@ -1,6 +1,3 @@
-import { Flex } from "@chakra-ui/react";
-
-<Flex id="main" direction="column" paddingX={[4, 16, 32]} paddingY={[2, 4, 8]} bg="#FFDE59">
 # Privacy Policy for Marcus Sanatan Software Services
 
 **Last Updated:** 14 November, 2023
@@ -48,7 +45,7 @@ Users can contact us directly to access, correct, or delete their personal data,
 
 International data transfers refer to the transfer of data outside the country of residence of the data subject. In our case, this may occur due to the use of international third-party services. We ensure that all such transfers comply with applicable data protection laws.
 
-## 9. Children’s Privacy
+## 9. Children's Privacy
 
 Our games and services do not specifically target children under the age of 13. We do not knowingly collect personal information from children under this age.
 
@@ -72,5 +69,3 @@ Marcus Sanatan Software Services
 122 Edward Street,
 Port-of-Spain, Trinidad and Tobago
 support@gameboymarcus.com
-
-</Flex>

@@ -2,13 +2,13 @@ import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllPosts, getPathFromDate } from "../../../../../../lib/posts";
+import { getAllPosts, getPathFromDate } from "@/lib/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { useMDXComponents } from "../../../../../../mdx-components";
-import { Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import { useMDXComponents } from "@/mdx-components";
 import "highlight.js/styles/github-dark.css";
-import YouTubeEmbed from "../../../../../../components/embeds/youtube";
-import InstagramEmbed from "../../../../../../components/embeds/instagram";
+import YouTubeEmbed from "@/components/embeds/youtube";
+import InstagramEmbed from "@/components/embeds/instagram";
+import type { Metadata } from "next";
 
 interface BlogPostProps {
   params: {
@@ -32,6 +32,34 @@ export async function generateStaticParams() {
   });
 }
 
+export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
+  const posts = getAllPosts();
+  const post = posts.find((p) => p.slug === params.slug);
+
+  if (!post) {
+    return {
+      title: "Post Not Found - GameBoyMarcus",
+    };
+  }
+
+  return {
+    title: `${post.title} - GameBoyMarcus`,
+    description: post.excerpt || post.title,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || post.title,
+      type: "article",
+      publishedTime: new Date(post.date).toISOString(),
+      authors: ["Marcus Sanatan"],
+    },
+    twitter: {
+      card: "summary",
+      title: post.title,
+      description: post.excerpt || post.title,
+    },
+  };
+}
+
 export default async function BlogPost({ params }: BlogPostProps) {
   const slug = params.slug;
   const posts = getAllPosts();
@@ -47,87 +75,57 @@ export default async function BlogPost({ params }: BlogPostProps) {
   const prevPost = posts[postIndex + 1] || null; // Older post
 
   return (
-    <Flex
-      id="main"
-      as="article"
-      bg="#FFDE59"
-      w="full"
-      grow={1}
-      direction="column"
-      padding={[4, 16, 32]}
-    >
-      <Heading
-        as="h1"
-        fontSize={[32, 48]}
-        color="black"
-        paddingY={[1, 2, 3]}
-        fontFamily="pressStart2P"
-        textAlign="center"
-      >
-        {post.title}
-      </Heading>
+    <article className="flex-1 bg-primary px-4 py-12 md:px-8 md:py-16">
+      <div className="mx-auto max-w-3xl">
+        <header className="mb-8 text-center">
+          <h1 className="mb-4 font-retro text-2xl text-black md:text-4xl">
+            {post.title}
+          </h1>
+          <time className="font-retro text-xs text-black md:text-sm">
+            {new Date(post.date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </time>
+        </header>
 
-      <Text
-        fontSize={["xs", "sm"]}
-        color="black"
-        paddingY={[1, 2]}
-        fontFamily="pressStart2P"
-        textAlign="center"
-      >
-        <em>{new Date(post.date).toLocaleDateString()}</em>
-      </Text>
-      <MDXRemote
-        source={post.content}
-        components={{ ...useMDXComponents({}), YouTubeEmbed, InstagramEmbed }}
-        options={{
-          mdxOptions: {
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [rehypeHighlight],
-          },
-        }}
-      />
-      <Stack
-        spacing={[4, 8]}
-        direction={["column", "row"]}
-        justifyContent="center"
-      >
-        {prevPost ? (
-          <Link
-            href={`/blog/${getPathFromDate(prevPost.date)}/${prevPost.slug}`}
-          >
-            <Text
-              fontSize={["xs", "sm"]}
-              color="white"
-              paddingY={[1, 2]}
-              fontFamily="pressStart2P"
-              textDecoration="underline"
-              _hover={{ color: "black" }}
+        <div className="prose prose-lg max-w-none">
+          <MDXRemote
+            source={post.content}
+            components={{ ...useMDXComponents({}), YouTubeEmbed, InstagramEmbed }}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+                rehypePlugins: [rehypeHighlight],
+              },
+            }}
+          />
+        </div>
+
+        <nav className="mt-12 flex flex-col justify-center gap-4 border-t-2 border-black pt-8 md:flex-row md:gap-8">
+          {prevPost ? (
+            <Link
+              href={`/blog/${getPathFromDate(prevPost.date)}/${prevPost.slug}`}
+              className="font-retro text-xs text-black underline transition-opacity hover:opacity-70 md:text-sm"
             >
               ← {prevPost.title}
-            </Text>
-          </Link>
-        ) : (
-          <span />
-        )}
-        {nextPost ? (
-          <Link
-            href={`/blog/${getPathFromDate(nextPost.date)}/${nextPost.slug}`}
-          >
-            <Text
-              fontSize={["xs", "sm"]}
-              color="white"
-              paddingY={[1, 2]}
-              fontFamily="pressStart2P"
-              textDecoration="underline"
-              _hover={{ color: "black" }}
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
+          {nextPost ? (
+            <Link
+              href={`/blog/${getPathFromDate(nextPost.date)}/${nextPost.slug}`}
+              className="font-retro text-xs text-black underline transition-opacity hover:opacity-70 md:text-sm"
             >
               {nextPost.title} →
-            </Text>
-          </Link>
-        ) : (
-          <span />
-        )}
-      </Stack>
-    </Flex>
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
+        </nav>
+      </div>
+    </article>
   );
 }

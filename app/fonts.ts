@@ -1,10 +1,16 @@
 import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 
-export const pressStart2P = localFont({
-  src: "./fonts/PressStart2P-Regular.ttf",
+// Readable body font
+export const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-// Font files can be colocated inside of `pages`
-export const arcadeGamer = localFont({
-  src: "./fonts/ArcadeGamer-Regular.ttf",
+// Keep retro font for headings/accents
+export const pressStart2P = localFont({
+  src: "./fonts/PressStart2P-Regular.ttf",
+  variable: "--font-press-start",
+  display: "swap",
 });
