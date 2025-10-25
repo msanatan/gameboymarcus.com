@@ -1,4 +1,4 @@
-I'm **Marcus**, a software/game dev from Trinidad and Tobago! Current interests revolve around AI, VR and AR - but I love building interesting projects.
+I'm Marcus, a software/game dev from Trinidad and Tobago! Current interests revolve around AI, VR and AR - but I love building interesting projects.
 
 - I make mobile and VR games with Unity
 - I develop services with Golang, Node.js (Express.js, NestJS), Python (AWS Chalice, Flask)
