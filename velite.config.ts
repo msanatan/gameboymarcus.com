@@ -27,11 +27,11 @@ const posts = defineCollection({
     })
     .transform((data, { meta }) => {
       // Extract slug from file path: posts/2024/my-post/index.md -> my-post
-      const pathParts = meta.path.split("/");
+      const pathParts = (meta.path as string).split("/");
       const slug = pathParts[pathParts.length - 2]; // Get parent directory name
 
-      // Ensure date is a Date object
-      const dateObj = data.date instanceof Date ? data.date : new Date(data.date);
+      // s.isodate() returns a string, convert to Date for formatting
+      const dateObj = new Date(data.date);
 
       return {
         ...data,
@@ -39,7 +39,7 @@ const posts = defineCollection({
         // Generate URL path from date and slug
         url: `/blog/${formatDatePath(dateObj)}/${slug}`,
         // Format date for easier use
-        dateString: dateObj.toISOString(),
+        dateString: data.date, // Already in ISO string format
       };
     }),
 });
@@ -56,7 +56,7 @@ const pages = defineCollection({
     })
     .transform((data, { meta }) => {
       // Extract slug from file path: content/about.md -> about
-      const filename = meta.path.split("/").pop()?.replace(/\.md$/, "") || "";
+      const filename = (meta.path as string).split("/").pop()?.replace(/\.md$/, "") || "";
 
       return {
         ...data,
@@ -75,6 +75,10 @@ export default defineConfig({
     clean: true,
   },
   collections: { posts, pages },
+  markdown: {
+    rehypePlugins: [rehypeHighlight],
+    remarkPlugins: [remarkGfm],
+  },
   mdx: {
     rehypePlugins: [rehypeHighlight],
     remarkPlugins: [remarkGfm],
