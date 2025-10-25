@@ -27,7 +27,7 @@ export default function Home() {
             <div className="mt-4 flex flex-wrap justify-center gap-4 md:justify-start">
               <Link
                 href="/about"
-                className="rounded-lg bg-black px-6 py-3 font-retro text-sm text-primary transition-opacity hover:opacity-80"
+                className="rounded-lg border-2 border-black px-6 py-3 font-retro text-sm text-black transition-all hover:bg-black hover:text-primary"
               >
                 About Me
               </Link>
