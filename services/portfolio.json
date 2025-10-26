@@ -2,7 +2,7 @@
   {
     "title": "GeoMatch",
     "img": {
-      "url": "/images/portfolio/games/geomatch.jpg",
+      "url": "/images/portfolio/projects/geomatch.jpg",
       "alt": "Player about to match a triangle in GeoMatch with 420 points and 2 out of 3 lives"
     },
     "description": "Match the incoming shapes with one of yours! GeoMatch is a fun little game I made in 1 day!",
@@ -14,7 +14,7 @@
   {
     "title": "Shoot Into the Void",
     "img": {
-      "url": "/images/portfolio/games/shootintothevoid.jpg",
+      "url": "/images/portfolio/projects/shootintothevoid.jpg",
       "alt": "Player about to match a triangle in GeoMatch with 420 points and 2 out of 3 lives"
     },
     "description": "Guide your missile to take out as much enemies as you can!",
