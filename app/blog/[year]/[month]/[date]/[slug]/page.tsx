@@ -10,12 +10,12 @@ const posts = [...allPosts].sort((a, b) =>
 );
 
 interface BlogPostProps {
-  params: {
+  params: Promise<{
     year: string;
     month: string;
     date: string;
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -31,7 +31,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
-  const post = posts.find((p) => p.slug === params.slug);
+  const { slug } = await params;
+  const post = posts.find((p) => p.slug === slug);
 
   if (!post) {
     return { title: "Post Not Found - GameBoyMarcus" };
@@ -51,7 +52,8 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
 }
 
 export default async function BlogPost({ params }: BlogPostProps) {
-  const postIndex = posts.findIndex((post) => post.slug === params.slug);
+  const { slug } = await params;
+  const postIndex = posts.findIndex((post) => post.slug === slug);
 
   if (postIndex === -1) {
     notFound();

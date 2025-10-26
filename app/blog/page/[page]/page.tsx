@@ -10,9 +10,9 @@ const posts = [...allPosts].sort((a, b) =>
 );
 
 interface BlogPageProps {
-  params: {
+  params: Promise<{
     page: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -23,7 +23,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: BlogPageProps) {
-  const page = parseInt(params.page, 10);
+  const { page: pageParam } = await params;
+  const page = parseInt(pageParam, 10);
   return {
     title: `Blog - Page ${page} - GameBoyMarcus`,
     description: "Thoughts on software development, AI, games, and more by Marcus Sanatan",
@@ -31,7 +32,8 @@ export async function generateMetadata({ params }: BlogPageProps) {
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-  const page = parseInt(params.page, 10);
+  const { page: pageParam } = await params;
+  const page = parseInt(pageParam, 10);
 
   if (isNaN(page) || page < 1) {
     notFound();
