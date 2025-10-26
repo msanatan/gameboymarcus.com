@@ -15,6 +15,8 @@ type PortfolioItem = {
     appStore?: string;
     meta?: string;
     itch?: string;
+    github?: string;
+    website?: string;
   };
   role: string;
 };
@@ -56,7 +58,7 @@ export default function ProjectsPage() {
                 <div className="flex flex-wrap gap-3">
                   {project.links.playStore && (
                     <a
-                      href={project.links.playStore}
+                      href={`${project.links.playStore}?ref=gameboymarcus.com`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
@@ -66,7 +68,7 @@ export default function ProjectsPage() {
                   )}
                   {project.links.appStore && (
                     <a
-                      href={project.links.appStore}
+                      href={`${project.links.appStore}?ref=gameboymarcus.com`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
@@ -76,7 +78,7 @@ export default function ProjectsPage() {
                   )}
                   {project.links.itch && (
                     <a
-                      href={project.links.itch}
+                      href={`${project.links.itch}?ref=gameboymarcus.com`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
@@ -86,12 +88,32 @@ export default function ProjectsPage() {
                   )}
                   {project.links.meta && (
                     <a
-                      href={project.links.meta}
+                      href={`${project.links.meta}?ref=gameboymarcus.com`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
                     >
                       Meta Quest
+                    </a>
+                  )}
+                  {project.links.github && (
+                    <a
+                      href={`${project.links.github}?ref=gameboymarcus.com`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
+                    >
+                      GitHub
+                    </a>
+                  )}
+                  {project.links.website && (
+                    <a
+                      href={`${project.links.website}?ref=gameboymarcus.com`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
+                    >
+                      Website
                     </a>
                   )}
                 </div>
