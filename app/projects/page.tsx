@@ -31,7 +31,7 @@ export default function ProjectsPage() {
           Projects
         </h1>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {typedPortfolio.map((project, index) => (
             <div
               key={index}
@@ -55,15 +55,22 @@ export default function ProjectsPage() {
                 <p className="mb-4 text-xs italic text-black md:text-sm">
                   Role: {project.role}
                 </p>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2">
                   {project.links.playStore && (
                     <a
                       href={`${project.links.playStore}?ref=gameboymarcus.com`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
+                      className="group relative"
+                      title="Google Play Store"
                     >
-                      Play Store
+                      <Image
+                        src="/images/portfolio/icons/google-playstore.svg"
+                        alt="Play Store"
+                        width={32}
+                        height={32}
+                        className="transition-opacity hover:opacity-70"
+                      />
                     </a>
                   )}
                   {project.links.appStore && (
@@ -71,9 +78,16 @@ export default function ProjectsPage() {
                       href={`${project.links.appStore}?ref=gameboymarcus.com`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
+                      className="group relative"
+                      title="Apple App Store"
                     >
-                      App Store
+                      <Image
+                        src="/images/portfolio/icons/apple-appstore.svg"
+                        alt="App Store"
+                        width={32}
+                        height={32}
+                        className="transition-opacity hover:opacity-70"
+                      />
                     </a>
                   )}
                   {project.links.itch && (
@@ -81,9 +95,16 @@ export default function ProjectsPage() {
                       href={`${project.links.itch}?ref=gameboymarcus.com`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
+                      className="group relative"
+                      title="Itch.io"
                     >
-                      Itch.io
+                      <Image
+                        src="/images/portfolio/icons/itch.svg"
+                        alt="Itch.io"
+                        width={32}
+                        height={32}
+                        className="transition-opacity hover:opacity-70"
+                      />
                     </a>
                   )}
                   {project.links.meta && (
@@ -91,9 +112,16 @@ export default function ProjectsPage() {
                       href={`${project.links.meta}?ref=gameboymarcus.com`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
+                      className="group relative"
+                      title="Meta Quest"
                     >
-                      Meta Quest
+                      <Image
+                        src="/images/portfolio/icons/meta-logo.svg"
+                        alt="Meta Quest"
+                        width={32}
+                        height={32}
+                        className="transition-opacity hover:opacity-70"
+                      />
                     </a>
                   )}
                   {project.links.github && (
@@ -101,9 +129,16 @@ export default function ProjectsPage() {
                       href={`${project.links.github}?ref=gameboymarcus.com`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
+                      className="group relative"
+                      title="GitHub"
                     >
-                      GitHub
+                      <Image
+                        src="/images/portfolio/icons/github.svg"
+                        alt="GitHub"
+                        width={32}
+                        height={32}
+                        className="transition-opacity hover:opacity-70"
+                      />
                     </a>
                   )}
                   {project.links.website && (
@@ -111,9 +146,16 @@ export default function ProjectsPage() {
                       href={`${project.links.website}?ref=gameboymarcus.com`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded bg-black px-4 py-2 font-retro text-xs text-primary transition-opacity hover:opacity-80"
+                      className="group relative"
+                      title="Website"
                     >
-                      Website
+                      <Image
+                        src="/images/portfolio/icons/website.svg"
+                        alt="Website"
+                        width={32}
+                        height={32}
+                        className="transition-opacity hover:opacity-70"
+                      />
                     </a>
                   )}
                 </div>
