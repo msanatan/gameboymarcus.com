@@ -1,14 +1,39 @@
 [
   {
-    "title": "GeoMatch",
+    "title": "Coplay",
     "img": {
-      "url": "/images/portfolio/projects/geomatch.jpg",
-      "alt": "Player about to match a triangle in GeoMatch with 420 points and 2 out of 3 lives"
+      "url": "/images/portfolio/projects/coplay-logo.png",
+      "alt": "Coplay logo"
     },
-    "description": "Match the incoming shapes with one of yours! GeoMatch is a fun little game I made in 1 day!",
-    "role": "Progamming, design and art",
+    "description": "Coplay is the best AI assistant for Unity. It lives in the editor, and allows you to make a game with prompts",
+    "role": "Co-founder",
     "links": {
-      "playStore": "https://play.google.com/store/apps/details?id=com.GameBoyMarcus.GeoMatch"
+      "website": "https://coplay.dev"
+    }
+  },
+  {
+    "title": "MCP for Unity",
+    "img": {
+      "url": "/images/portfolio/projects/mcp-logo.png",
+      "alt": "MCP for Unity logo"
+    },
+    "description": "MCP for Unity connects your LLMs to Unity via MCP. It's the most popular OSS MCP for Unity",
+    "role": "Maintainer",
+    "links": {
+      "github": "https://github.com/CoplayDev/unity-mcp"
+    }
+  },
+  {
+    "title": "Legal Cost Calculator",
+    "img": {
+      "url": "/images/portfolio/projects/legalcostcalculator-logo.png",
+      "alt": "Legal Cost Calculator logo"
+    },
+    "description": "Legal Cost Calculator is a mobile tool for lawyers in Trinidad and Tobago to calculate legal fairs after judgements.",
+    "role": "Lead developer",
+    "links": {
+      "website": "https://legalcosts.app",
+      "playStore": "https://play.google.com/store/apps/details?id=com.legalcostcalculator.legalcostcalculator"
     }
   },
   {
@@ -21,6 +46,18 @@
     "role": "Progamming and sound",
     "links": {
       "itch": "https://gameboymarcus.itch.io/shoot-into-the-void"
+    }
+  },
+  {
+    "title": "GeoMatch",
+    "img": {
+      "url": "/images/portfolio/projects/geomatch.jpg",
+      "alt": "Player about to match a triangle in GeoMatch with 420 points and 2 out of 3 lives"
+    },
+    "description": "Match the incoming shapes with one of yours! GeoMatch is a fun little game I made in 1 day!",
+    "role": "Progamming, design and art",
+    "links": {
+      "playStore": "https://play.google.com/store/apps/details?id=com.GameBoyMarcus.GeoMatch"
     }
   }
 ]
