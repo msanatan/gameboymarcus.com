@@ -52,7 +52,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
   return (
     <div className="flex-1 bg-black px-4 py-12 md:px-8 md:py-16">
       <div className="mx-auto max-w-4xl">
-        <h1 className="mb-12 text-center font-retro text-2xl text-primary">
+        <h1 className="mb-12 text-center font-retro text-3xl text-primary">
           Blog
         </h1>
 
@@ -60,7 +60,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           {paginatedPosts.map((post) => (
             <li key={post.slug} className="border-b border-primary pb-8 last:border-0">
               <Link href={post.url} className="group">
-                <h2 className="mb-3 font-retro text-lg text-primary underline transition-opacity group-hover:opacity-80 md:text-xl">
+                <h2 className="mb-3 font-bold text-lg text-primary underline transition-opacity group-hover:opacity-80 md:text-xl">
                   {post.title}
                 </h2>
                 <p className="mb-2 text-xs text-white md:text-sm">

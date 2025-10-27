@@ -18,32 +18,12 @@ export default function Home() {
             />
           </div>
           <div className="flex flex-col gap-4">
-            <h1 className="font-retro text-2xl text-black md:text-5xl">
+            <h1 className="font-retro text-3xl text-black md:text-5xl">
               GameBoyMarcus
             </h1>
             <p className="text-lg text-black md:text-xl">
               Hi! I&apos;m Marcus, a software and game developer from Trinidad and Tobago.
             </p>
-            <div className="mt-4 flex flex-wrap justify-center gap-4 md:justify-start">
-              <Link
-                href="/about"
-                className="rounded-lg border-2 border-black px-6 py-3 font-retro text-sm text-black transition-all hover:bg-black hover:text-primary"
-              >
-                About Me
-              </Link>
-              <Link
-                href="/projects"
-                className="rounded-lg border-2 border-black px-6 py-3 font-retro text-sm text-black transition-all hover:bg-black hover:text-primary"
-              >
-                View Projects
-              </Link>
-              <Link
-                href="/blog/page/1"
-                className="rounded-lg border-2 border-black px-6 py-3 font-retro text-sm text-black transition-all hover:bg-black hover:text-primary"
-              >
-                Read Blog
-              </Link>
-            </div>
           </div>
         </div>
       </section>

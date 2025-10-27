@@ -27,7 +27,7 @@ export default function ProjectsPage() {
   return (
     <div className="flex-1 bg-black px-4 py-12 md:px-8 md:py-16">
       <div className="mx-auto max-w-6xl">
-        <h1 className="mb-12 text-center font-retro text-2xl text-primary">
+        <h1 className="mb-12 text-center font-retro text-3xl text-primary">
           Projects
         </h1>
 
@@ -46,7 +46,7 @@ export default function ProjectsPage() {
                 />
               </div>
               <div className="p-6">
-                <h2 className="mb-3 font-retro text-xl text-black">
+                <h2 className="mb-3 text-lg font-bold text-black">
                   {project.title}
                 </h2>
                 <p className="mb-4 text-sm text-black md:text-base">

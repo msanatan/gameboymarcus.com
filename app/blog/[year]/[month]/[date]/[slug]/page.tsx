@@ -67,7 +67,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
     <article className="flex-1 bg-primary px-4 py-12 md:px-8 md:py-16">
       <div className="mx-auto max-w-3xl">
         <header className="mb-8 text-center">
-          <h1 className="mb-4 font-retro text-2xl text-black">
+          <h1 className="mb-4 font-retro text-3xl text-black">
             {post.title}
           </h1>
           <time className="font-retro text-xs text-black md:text-sm">
