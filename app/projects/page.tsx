@@ -21,6 +21,10 @@ type PortfolioItem = {
   role: string;
 };
 
+function addReferrer(url: string): string {
+  return url.indexOf("?") === -1 ? `${url}?ref=gameboymarcus.com` : `${url}&ref=gameboymarcus.com`;
+}
+
 export default function ProjectsPage() {
   const typedPortfolio = portfolio as PortfolioItem[];
 
@@ -58,7 +62,7 @@ export default function ProjectsPage() {
                 <div className="flex flex-wrap gap-2">
                   {project.links.playStore && (
                     <a
-                      href={`${project.links.playStore}?ref=gameboymarcus.com`}
+                      href={addReferrer(project.links.playStore)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative"
@@ -75,7 +79,7 @@ export default function ProjectsPage() {
                   )}
                   {project.links.appStore && (
                     <a
-                      href={`${project.links.appStore}?ref=gameboymarcus.com`}
+                      href={addReferrer(project.links.appStore)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative"
@@ -92,7 +96,7 @@ export default function ProjectsPage() {
                   )}
                   {project.links.itch && (
                     <a
-                      href={`${project.links.itch}?ref=gameboymarcus.com`}
+                      href={addReferrer(project.links.itch)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative"
@@ -109,7 +113,7 @@ export default function ProjectsPage() {
                   )}
                   {project.links.meta && (
                     <a
-                      href={`${project.links.meta}?ref=gameboymarcus.com`}
+                      href={addReferrer(project.links.meta)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative"
@@ -126,7 +130,7 @@ export default function ProjectsPage() {
                   )}
                   {project.links.github && (
                     <a
-                      href={`${project.links.github}?ref=gameboymarcus.com`}
+                      href={addReferrer(project.links.github)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative"
@@ -143,7 +147,7 @@ export default function ProjectsPage() {
                   )}
                   {project.links.website && (
                     <a
-                      href={`${project.links.website}?ref=gameboymarcus.com`}
+                      href={addReferrer(project.links.website)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative"
