@@ -14,3 +14,9 @@ export const pressStart2P = localFont({
   variable: "--font-press-start",
   display: "swap",
 });
+
+export const kenneyBlocks = localFont({
+  src: "./fonts/Kenney-Blocks.ttf",
+  variable: "--font-kenney-blocks",
+  display: "swap",
+});

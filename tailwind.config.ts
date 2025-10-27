@@ -18,7 +18,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        retro: ["var(--font-press-start)", "monospace"],
+        retro: ["var(--font-kenney-blocks)", "monospace"],
       },
       typography: {
         DEFAULT: {
