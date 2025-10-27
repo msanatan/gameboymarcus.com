@@ -17,7 +17,7 @@ export default function NavBar() {
       <div className="flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="px-4 py-2 md:px-8">
-          <h1 className="font-retro text-4xl text-primary hover:opacity-80 transition-opacity">
+          <h1 className="font-arcadeGamer text-4xl text-primary hover:opacity-80 transition-opacity">
             GBM
           </h1>
         </Link>
@@ -28,7 +28,7 @@ export default function NavBar() {
             <Link
               key={link.name}
               href={link.href}
-              className="font-retro text-2xl text-primary hover:underline"
+              className="font-arcadeGamer text-2xl text-primary hover:underline"
             >
               {link.name}
             </Link>
@@ -67,7 +67,7 @@ export default function NavBar() {
               key={link.name}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="font-retro text-sm text-primary hover:underline"
+              className="font-arcadeGamer text-sm text-primary hover:underline"
             >
               {link.name}
             </Link>

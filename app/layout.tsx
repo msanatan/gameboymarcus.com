@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/navigation/navbar";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { inter, kenneyBlocks } from "./fonts";
+import { inter, kenneyBlocks, arcadeGamer } from "./fonts";
 
 export const metadata: Metadata = {
   title: "GameBoyMarcus",
@@ -62,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${kenneyBlocks.variable}`}>
+    <html lang="en" className={`${inter.variable} ${kenneyBlocks.variable} ${arcadeGamer.variable}`}>
       <body className="flex min-h-screen flex-col font-sans antialiased">
         <NavBar />
         <main className="flex flex-1 flex-col">{children}</main>

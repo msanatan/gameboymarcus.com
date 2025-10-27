@@ -20,3 +20,9 @@ export const kenneyBlocks = localFont({
   variable: "--font-kenney-blocks",
   display: "swap",
 });
+
+export const arcadeGamer = localFont({
+  src: "./fonts/ArcadeGamer-Regular.ttf",
+  variable: "--font-arcade-gamer",
+  display: "swap",
+});

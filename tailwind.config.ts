@@ -18,7 +18,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        retro: ["var(--font-kenney-blocks)", "monospace"],
+        kenneyBlocks: ["var(--font-kenney-blocks)", "monospace"],
+        arcadeGamer: ["var(--font-arcade-gamer)", "monospace"],
       },
       typography: {
         DEFAULT: {

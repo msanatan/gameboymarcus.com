@@ -52,7 +52,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
   return (
     <div className="flex-1 bg-black px-4 py-12 md:px-8 md:py-16">
       <div className="mx-auto max-w-4xl">
-        <h1 className="mb-12 text-center font-retro text-3xl text-primary">
+        <h1 className="mb-12 text-center font-kenneyBlocks text-3xl text-primary">
           Blog
         </h1>
 
@@ -84,7 +84,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           {page > 1 ? (
             <Link
               href={`/blog/page/${page - 1}`}
-              className="rounded border-2 border-white px-6 py-3 font-retro text-sm text-white transition-colors hover:border-primary hover:text-primary"
+              className="rounded border-2 border-white px-6 py-3 font-kenneyBlocks text-sm text-white transition-colors hover:border-primary hover:text-primary"
             >
               Previous
             </Link>
@@ -92,14 +92,14 @@ export default async function BlogPage({ params }: BlogPageProps) {
             <div className="w-28" />
           )}
 
-          <span className="font-retro text-sm text-white">
+          <span className="font-kenneyBlocks text-sm text-white">
             Page {page} of {totalPages}
           </span>
 
           {page < totalPages ? (
             <Link
               href={`/blog/page/${page + 1}`}
-              className="rounded border-2 border-white px-6 py-3 font-retro text-sm text-white transition-colors hover:border-primary hover:text-primary"
+              className="rounded border-2 border-white px-6 py-3 font-kenneyBlocks text-sm text-white transition-colors hover:border-primary hover:text-primary"
             >
               Next
             </Link>

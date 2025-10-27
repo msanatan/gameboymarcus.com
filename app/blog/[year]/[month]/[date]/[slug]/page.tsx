@@ -67,10 +67,10 @@ export default async function BlogPost({ params }: BlogPostProps) {
     <article className="flex-1 bg-primary px-4 py-12 md:px-8 md:py-16">
       <div className="mx-auto max-w-3xl">
         <header className="mb-8 text-center">
-          <h1 className="mb-4 font-retro text-3xl text-black">
+          <h1 className="mb-4 font-kenneyBlocks text-3xl text-black">
             {post.title}
           </h1>
-          <time className="font-retro text-xs text-black md:text-sm">
+          <time className="font-kenneyBlocks text-xs text-black md:text-sm">
             {new Date(post.dateString).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
@@ -88,7 +88,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
           {prevPost ? (
             <Link
               href={prevPost.url}
-              className="font-retro text-xs text-black underline transition-opacity hover:opacity-70 md:text-sm"
+              className="font-kenneyBlocks text-xs text-black underline transition-opacity hover:opacity-70 md:text-sm"
             >
               ← {prevPost.title}
             </Link>
@@ -98,7 +98,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
           {nextPost ? (
             <Link
               href={nextPost.url}
-              className="font-retro text-xs text-black underline transition-opacity hover:opacity-70 md:text-sm"
+              className="font-kenneyBlocks text-xs text-black underline transition-opacity hover:opacity-70 md:text-sm"
             >
               {nextPost.title} →
             </Link>
