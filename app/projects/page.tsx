@@ -69,7 +69,7 @@ export default function ProjectsPage() {
                       title="Google Play Store"
                     >
                       <Image
-                        src="/images/portfolio/icons/google-playstore.svg"
+                        src="/images/icons/google-playstore.svg"
                         alt="Play Store"
                         width={32}
                         height={32}
@@ -86,7 +86,7 @@ export default function ProjectsPage() {
                       title="Apple App Store"
                     >
                       <Image
-                        src="/images/portfolio/icons/apple-appstore.svg"
+                        src="/images/icons/apple-appstore.svg"
                         alt="App Store"
                         width={32}
                         height={32}
@@ -103,7 +103,7 @@ export default function ProjectsPage() {
                       title="Itch.io"
                     >
                       <Image
-                        src="/images/portfolio/icons/itch.svg"
+                        src="/images/icons/itch.svg"
                         alt="Itch.io"
                         width={32}
                         height={32}
@@ -120,7 +120,7 @@ export default function ProjectsPage() {
                       title="Meta Quest"
                     >
                       <Image
-                        src="/images/portfolio/icons/meta-logo.svg"
+                        src="/images/icons/meta-logo.svg"
                         alt="Meta Quest"
                         width={32}
                         height={32}
@@ -137,7 +137,7 @@ export default function ProjectsPage() {
                       title="GitHub"
                     >
                       <Image
-                        src="/images/portfolio/icons/github.svg"
+                        src="/images/icons/github.svg"
                         alt="GitHub"
                         width={32}
                         height={32}
@@ -154,7 +154,7 @@ export default function ProjectsPage() {
                       title="Website"
                     >
                       <Image
-                        src="/images/portfolio/icons/website.svg"
+                        src="/images/icons/website.svg"
                         alt="Website"
                         width={32}
                         height={32}
