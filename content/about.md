@@ -22,7 +22,7 @@ If you we got similar interests, please reach out!
     <img src="/images/icons/twitter.svg" alt="Twitter" width="32" height="32" />
   </a>
   <a href="https://threads.net/@gameboymarcus" target="_blank" rel="noopener noreferrer" title="Threads">
-    <img src="/images/icons/threads.svg" alt="Threads" width="32" height="32" />
+    <img src="/images/icons/threads.svg" alt="Threads" width="26" height="26" />
   </a>
   <a href="https://youtube.com/@marcussanatan" target="_blank" rel="noopener noreferrer" title="YouTube">
     <img src="/images/icons/youtube.svg" alt="YouTube" width="32" height="32" />
