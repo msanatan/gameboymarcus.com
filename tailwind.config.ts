@@ -129,6 +129,12 @@ const config: Config = {
             'ol > li': {
               paddingLeft: '0.375em',
             },
+            'ul > li::marker': {
+              color: '#111827',
+            },
+            'ol > li::marker': {
+              color: '#111827',
+            },
             img: {
               borderRadius: '0.5rem',
               marginTop: '2em',
