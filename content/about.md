@@ -9,22 +9,22 @@ I'm Marcus, a software/game dev from Trinidad and Tobago! Current interests revo
 If you we got similar interests, please reach out!
 
 <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-  <a href="https://github.com/msanatan" target="_blank" rel="noopener noreferrer" title="GitHub">
+  <a href="https://github.com/msanatan?ref=gameboymarcus.com" target="_blank" rel="noopener noreferrer" title="GitHub">
     <img src="/images/icons/github.svg" alt="GitHub" width="32" height="32" />
   </a>
-  <a href="https://linkedin.com/in/msanatan" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+  <a href="https://linkedin.com/in/msanatan?ref=gameboymarcus.com" target="_blank" rel="noopener noreferrer" title="LinkedIn">
     <img src="/images/icons/linkedin.svg" alt="LinkedIn" width="32" height="32" />
   </a>
-  <a href="https://instagram.com/gameboymarcus" target="_blank" rel="noopener noreferrer" title="Instagram">
+  <a href="https://instagram.com/gameboymarcus?ref=gameboymarcus.com" target="_blank" rel="noopener noreferrer" title="Instagram">
     <img src="/images/icons/instagram.svg" alt="Instagram" width="32" height="32" />
   </a>
-  <a href="https://twitter.com/marcussanatan" target="_blank" rel="noopener noreferrer" title="Twitter">
+  <a href="https://twitter.com/marcussanatan?ref=gameboymarcus.com" target="_blank" rel="noopener noreferrer" title="Twitter">
     <img src="/images/icons/twitter.svg" alt="Twitter" width="32" height="32" />
   </a>
-  <a href="https://threads.net/@gameboymarcus" target="_blank" rel="noopener noreferrer" title="Threads">
+  <a href="https://threads.net/@gameboymarcus?ref=gameboymarcus.com" target="_blank" rel="noopener noreferrer" title="Threads">
     <img src="/images/icons/threads.svg" alt="Threads" width="26" height="26" />
   </a>
-  <a href="https://youtube.com/@marcussanatan" target="_blank" rel="noopener noreferrer" title="YouTube">
+  <a href="https://youtube.com/@marcussanatan?ref=gameboymarcus.com" target="_blank" rel="noopener noreferrer" title="YouTube">
     <img src="/images/icons/youtube.svg" alt="YouTube" width="32" height="32" />
   </a>
 </div>
