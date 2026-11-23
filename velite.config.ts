@@ -5,11 +5,23 @@ import remarkGfm from "remark-gfm";
 // Helper to format date as YYYY/MM/DD
 function formatDatePath(date: Date | string): string {
   const dateObj = date instanceof Date ? date : new Date(date);
-  const year = dateObj.getFullYear();
-  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-  const day = String(dateObj.getDate()).padStart(2, "0");
+  const year = dateObj.getUTCFullYear();
+  const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(dateObj.getUTCDate()).padStart(2, "0");
   return `${year}/${month}/${day}`;
 }
+
+// Frontmatter dates carry no offset, so read them as UTC. Otherwise the URL and
+// displayed day depend on the timezone of the machine running the build.
+const utcDate = s.string().transform((value, ctx) => {
+  const hasOffset = /(Z|UTC|[+-]\d{2}:?\d{2})$/.test(value.trim());
+  const parsed = new Date(hasOffset ? value : `${value.trim()} UTC`);
+  if (Number.isNaN(parsed.getTime())) {
+    ctx.addIssue({ code: "custom", message: `Invalid date: ${value}` });
+    return value;
+  }
+  return parsed.toISOString();
+});
 
 // Schema for blog posts
 const posts = defineCollection({
@@ -18,7 +30,7 @@ const posts = defineCollection({
   schema: s
     .object({
       title: s.string(),
-      date: s.isodate(),
+      date: utcDate,
       categories: s.array(s.string()).optional(),
       tags: s.array(s.string()).optional(),
       content: s.markdown(),
@@ -30,7 +42,6 @@ const posts = defineCollection({
       const pathParts = (meta.path as string).split("/");
       const slug = pathParts[pathParts.length - 2]; // Get parent directory name
 
-      // s.isodate() returns a string, convert to Date for formatting
       const dateObj = new Date(data.date);
 
       return {
