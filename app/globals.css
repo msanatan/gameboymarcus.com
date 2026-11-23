@@ -1,7 +1,18 @@
 @import 'tailwindcss';
 
 @plugin '@tailwindcss/typography';
-@config '../tailwind.config.ts';
+
+@theme {
+  --color-primary: #ffde59;
+  --color-link: #597aff;
+  --color-accent: #00cdac;
+  --color-code-bg: #000000;
+  --color-code-text: #79c0ff;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-kenneyBlocks: var(--font-kenney-blocks), monospace;
+  --font-arcadeGamer: var(--font-arcade-gamer), monospace;
+}
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
@@ -28,5 +39,183 @@
 
   body {
     @apply bg-white text-black;
+  }
+}
+
+/* Site overrides for the typography plugin's `prose` defaults */
+@utility prose {
+  max-width: none;
+  color: #1f2937;
+
+  & :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: #597aff;
+    text-decoration: underline;
+  }
+
+  & :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
+    color: #4560d9;
+  }
+
+  & :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: #111827;
+    font-weight: 700;
+  }
+
+  /* Re-assert the plugin's contextual rules, which the overrides above would otherwise beat */
+  & :where(a strong):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+  & :where(blockquote strong):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+  & :where(thead th strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: inherit;
+  }
+
+  & :where(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: #111827;
+    font-weight: 800;
+    font-size: 2.25em;
+    margin-top: 0;
+    margin-bottom: 0.8888889em;
+  }
+
+  & :where(h1 strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: inherit;
+    font-weight: 900;
+  }
+
+  & :where(h2):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: #111827;
+    font-weight: 700;
+    font-size: 1.875em;
+    margin-top: 1.5555556em;
+    margin-bottom: 0.8888889em;
+  }
+
+  & :where(h2 strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: inherit;
+    font-weight: 800;
+  }
+
+  & :where(h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: #111827;
+    font-weight: 600;
+    font-size: 1.5em;
+    margin-top: 1.6em;
+    margin-bottom: 0.6em;
+  }
+
+  & :where(h3 strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: inherit;
+    font-weight: 700;
+  }
+
+  & :where(h4):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: #111827;
+    font-weight: 600;
+    font-size: 1.25em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+
+  & :where(h4 strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: inherit;
+    font-weight: 700;
+  }
+
+  & :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: #e11d48;
+    background-color: #fef2f2;
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.375rem;
+    font-weight: 600;
+    font-size: 0.875em;
+  }
+
+  & :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+  & :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+    content: "";
+  }
+
+  & :where(a code):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+  & :where(h1 code):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+  & :where(h4 code):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+  & :where(blockquote code):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+  & :where(thead th code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: inherit;
+  }
+
+  & :where(h2 code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: inherit;
+    font-size: 0.875em;
+  }
+
+  & :where(h3 code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: inherit;
+    font-size: 0.9em;
+  }
+
+  & :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    background-color: #1f2937;
+    color: #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.875em;
+    line-height: 1.7142857;
+  }
+
+  & :where(pre code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    background-color: transparent;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  & :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    font-weight: 500;
+    font-style: italic;
+    color: #374151;
+    border-left-width: 0.25rem;
+    border-left-color: #ffde59;
+    quotes: "\201C" "\201D" "\2018" "\2019";
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+    background-color: #fffbeb;
+    padding: 1rem;
+    border-radius: 0.25rem;
+  }
+
+  & :where(blockquote p:first-of-type):not(:where([class~="not-prose"], [class~="not-prose"] *))::before {
+    content: open-quote;
+  }
+
+  & :where(blockquote p:last-of-type):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+    content: close-quote;
+  }
+
+  & :where(ul):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    list-style-type: disc;
+    padding-left: 1.625em;
+  }
+
+  & :where(ol):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    list-style-type: decimal;
+    padding-left: 1.625em;
+  }
+
+  & :where(ul > li):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+  & :where(ol > li):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    padding-left: 0.375em;
+  }
+
+  & :where(ul > li):not(:where([class~="not-prose"], [class~="not-prose"] *))::marker,
+  & :where(ol > li):not(:where([class~="not-prose"], [class~="not-prose"] *))::marker {
+    color: #111827;
+  }
+
+  & :where(img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    border-radius: 0.5rem;
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 }
