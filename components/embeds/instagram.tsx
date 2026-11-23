@@ -7,7 +7,7 @@ export default function InstagramEmbed({
   title: string;
   orientation: string;
 }) {
-  const aspectClass = orientation === "landscape" ? "aspect-video" : "aspect-[9/16]";
+  const aspectClass = orientation === "landscape" ? "aspect-video" : "aspect-9/16";
 
   return (
     <div className={`relative my-4 max-w-xl overflow-hidden rounded-lg md:my-6 ${aspectClass}`}>

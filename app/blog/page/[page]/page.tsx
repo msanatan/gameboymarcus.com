@@ -84,7 +84,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           {page > 1 ? (
             <Link
               href={`/blog/page/${page - 1}`}
-              className="rounded border-2 border-white px-6 py-3 font-kenneyBlocks text-sm text-white transition-colors hover:border-primary hover:text-primary"
+              className="rounded-sm border-2 border-white px-6 py-3 font-kenneyBlocks text-sm text-white transition-colors hover:border-primary hover:text-primary"
             >
               Previous
             </Link>
@@ -99,7 +99,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           {page < totalPages ? (
             <Link
               href={`/blog/page/${page + 1}`}
-              className="rounded border-2 border-white px-6 py-3 font-kenneyBlocks text-sm text-white transition-colors hover:border-primary hover:text-primary"
+              className="rounded-sm border-2 border-white px-6 py-3 font-kenneyBlocks text-sm text-white transition-colors hover:border-primary hover:text-primary"
             >
               Next
             </Link>
